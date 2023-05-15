@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="195dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_movie_cardview"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="10dp"
+
+
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/view_movie_back"
+        android:scaleType="fitXY"
+        android:foreground="#80000000"
+        android:background="@android:color/transparent">
+
+
+
+    </ImageView>
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:background="@drawable/rounded_corner"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:clipToOutline="true"
+            android:elevation="4dp"
+            android:id="@+id/view_movie_poster"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="L'exorciste du Vatican"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:id="@+id/view_movie_title"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="bottom">
+
+                <TextView
+                    android:id="@+id/view_movie_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="2023"
+                    android:textColor="@color/light_gray"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/view_movie_vote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="75%"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/view_movie_genres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="horreur"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="italic"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

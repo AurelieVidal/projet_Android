@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailMovieActivity"
+    android:background="@color/background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <!-- Image de fond - Backdrop -->
+                <ImageView
+                    android:id="@+id/detail_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:foreground="#20000000"
+                    android:scaleType="centerCrop"/>
+                <!-- Image du poster superposée sur l'image de fond -->
+                <ImageView
+                    android:id="@+id/detail_poster"
+                    android:layout_width="150dp"
+                    android:layout_height="225dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/rounded_corner"
+                    android:clipToOutline="true"
+                    android:scaleType="fitXY"
+                    />
+
+                <TextView
+                    android:id="@+id/detail_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_toEndOf="@+id/detail_poster"
+                    android:text="75 %"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/detail_button_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="30dp"
+                    android:background="@android:color/transparent"
+                    android:paddingBottom="4dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:src="@drawable/baseline_star_24"
+                    app:tint="@color/black" />
+
+            </RelativeLayout>
+
+
+            <!-- Titre du film -->
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Titre du film"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/detail_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="21/04/2023"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/detail_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="0dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="2h2"
+                    android:textColor="@color/light_gray"
+                    android:textSize="15dp"
+                    android:textStyle="italic" />
+
+            </LinearLayout>
+
+
+            <!-- Résumé du film -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:text="Résumé"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ligne" />
+
+
+            <TextView
+                android:id="@+id/detail_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:lineHeight="20sp"
+                android:lineSpacingExtra="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:text="Résumé du film"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+
+            <!-- Informations en chiffres -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:text="Informations"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ligne" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Budget"
+                        android:textColor="@color/white"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/detail_budget"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:paddingRight="16dp"
+                        android:text="200 000 0000 €"
+                        android:textColor="@color/light_gray"
+                        android:textSize="13dp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Recette"
+                        android:textColor="@color/white"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/detail_revenue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:paddingRight="16dp"
+                        android:text="200 000 0000 €"
+                        android:textColor="@color/light_gray"
+                        android:textSize="13dp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Langue de la VO"
+                        android:textColor="@color/white"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/detail_vo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:paddingRight="16dp"
+                        android:text="Anglais"
+                        android:textColor="@color/light_gray"
+                        android:textSize="13dp"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Genre"
+                        android:textColor="@color/white"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:id="@+id/detail_genres"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:paddingRight="16dp"
+                        android:text="action, animaion, horreur"
+                        android:textColor="@color/light_gray"
+                        android:textSize="13dp"
+                        android:textStyle="italic" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <!-- Casting -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:text="Casting"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ligne" />
+
+
+            <!-- Bande Annonce-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_actors_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:text="Bande Annonce"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ligne" />
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/detail_youtube_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                />
+
+
+            <!-- Recommandations -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:text="Recommandations"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ligne" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detail_movies_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

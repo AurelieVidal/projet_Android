@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_favorites"
+        android:icon="@drawable/baseline_star_24"
+        android:title="Favorites"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/baseline_search_24"
+        android:title="search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_QRCode"
+        android:icon="@drawable/baseline_qr_code_scanner_24"
+        android:title="QRCode"
+        app:showAsAction="ifRoom" />
+</menu>
