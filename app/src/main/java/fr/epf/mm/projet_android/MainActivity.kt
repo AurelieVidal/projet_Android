@@ -1,8 +1,12 @@
 package fr.epf.mm.projet_android
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -15,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
+    lateinit var genres: List<Genre>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         val TopRecyclerView  = findViewById<RecyclerView>(R.id.home_top_recyclerView)
         val FrRecyclerView  = findViewById<RecyclerView>(R.id.home_fr_recyclerView)
 
-        val genres = Genres()
+        genres = Genres()
+
 
         val layoutManagerPop = LinearLayoutManager(this)
         layoutManagerPop.orientation = LinearLayoutManager.HORIZONTAL
@@ -52,7 +58,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_favorites -> {
-                //à remplir
+                val intent = Intent(this, FavorisActivity::class.java)
+                intent.putParcelableArrayListExtra("genres", ArrayList(genres))
+                this.startActivity(intent)
             }
             R.id.action_QRCode -> {
                 //à remplir
@@ -182,6 +190,7 @@ class MainActivity : AppCompatActivity() {
         }
         return genres
     }
+
 
 
 }

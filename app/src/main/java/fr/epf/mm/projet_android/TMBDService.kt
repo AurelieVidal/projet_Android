@@ -40,14 +40,14 @@ interface TMBDFrench {
 
 
 }
-
+/*
 interface TMBDTest {
 
     @GET("movie/{id}?api_key=31e4672492df89a26175c865fed7271a")
     suspend fun getMovies(@Path("id") id: Long, @Query("api_key") apiKey: String) : GetMoviesResult
 
 
-}
+}*/
 data class GetMoviesResult (val results: List<Movie>)
 
 interface TMDBGenres {

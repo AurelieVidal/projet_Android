@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -68,29 +69,63 @@ class DetailMovieActivity : AppCompatActivity() {
         //favori
         val imageButtonFav = findViewById<ImageButton>(R.id.detail_button_favorite)
 
-        var isFavorite = false
+        //récupérer la liste des favoris en mémoire
+        var favoris = GetFavMemory ()
+
+
+
+        //l'étoile s'allume si le film est un favori
+        for (fav in favoris){
+            if(fav.id ==movie?.id){
+                movie.favori = true
+                val colorStateList = ColorStateList.valueOf(Color.rgb(204,0,0))
+                imageButtonFav.setImageTintList(colorStateList)
+            }
+        }
+
+
 
         imageButtonFav.setOnClickListener {
-            val colorStateList = imageButtonFav.imageTintList // récupère la liste des couleurs
-            val defaultColor = colorStateList?.defaultColor // récupère la couleur par défaut (peut être null si aucune couleur par défaut n'est définie)
-            val hexColor = defaultColor?.let { it1 -> Integer.toHexString(it1) }
+            //val colorStateList = imageButtonFav.imageTintList
+            //val defaultColor = colorStateList?.defaultColor
+            //val hexColor = defaultColor?.let { it1 -> Integer.toHexString(it1) }
 
             // Vérifie l'état actuel du bouton et change la couleur en conséquence
-            if (isFavorite) {
-                val colorStateList = ColorStateList.valueOf(Color.rgb(46,46,46))
+            if (movie?.favori == true) {
+                val colorStateList = ColorStateList.valueOf(Color.rgb(0,0,0))
                 imageButtonFav.setImageTintList(colorStateList)
-                movie?.favori = false
+
 
                 Toast.makeText(this, "Film retiré des favoris", Toast.LENGTH_SHORT).show()
                 Log.d("EPF", "pas favori")
+                //retirer le film de la liste des favoris
+
+                val clone: MutableList<Movie> = mutableListOf()
+                for (fav in favoris){
+                    if (fav.id!=movie.id){
+                        clone.add(fav)
+
+                    }
+                }
+                favoris =  clone.toList()
             } else {
                 val colorStateList = ColorStateList.valueOf(Color.rgb(204,0,0))
                 imageButtonFav.setImageTintList(colorStateList)
                 Toast.makeText(this, "Film ajouté aux favoris", Toast.LENGTH_SHORT).show()
-                movie?.favori = true
-            }
+                //ajouter le film à la liste des favoris
 
-            isFavorite = !isFavorite
+                val clone: MutableList<Movie> = mutableListOf()
+                clone.addAll(favoris)
+                if (movie != null) {
+                    clone.add(movie)
+                }
+                favoris =  clone.toList()
+
+            }
+            //enregistrer la nouvelle liste
+            saveFavorites(favoris)
+            movie?.favori = !movie?.favori!!
+
         }
 
         //title
@@ -184,6 +219,29 @@ class DetailMovieActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun saveFavorites(favoris: List<Movie>) {
+        val gson = Gson()
+
+        val sharedPreferences = getSharedPreferences("Favoris", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.clear()
+        editor?.putString("movies", gson.toJson(favoris))
+        editor?.apply()
+    }
+
+    private fun GetFavMemory(): List<Movie> {
+        val favoris: MutableList<Movie> = mutableListOf()
+        val sharedPreferences = getSharedPreferences("Favoris", Context.MODE_PRIVATE)
+        val moviesJson = sharedPreferences.getString("movies", null)
+        val gson = Gson()
+        if (!moviesJson.isNullOrEmpty()) { // Vérifie si moviesJson n'est pas null ou vide
+            val movies = gson.fromJson(moviesJson, Array<Movie>::class.java).toMutableList()
+            Log.d("EPF", "Movies: $movies")
+            favoris.addAll(movies)
+        }
+        return favoris.toList()
     }
 
     private suspend fun getMovieDetails(movieId: Long): MovieD {
