@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_QRCode -> {
                 //à remplir
+                val intent = Intent(this, ScannerActivity::class.java)
+                this.startActivity(intent)
+
             }
             R.id.action_search -> {
                 //à remplir

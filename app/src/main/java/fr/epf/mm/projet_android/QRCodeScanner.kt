@@ -1,13 +1,14 @@
 package fr.epf.mm.projet_android;
 
 import androidx.appcompat.app.AppCompatActivity;
+/*
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
-import androidx.camera.view.PreviewView;
+import androidx.camera.view.PreviewView;*/
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -22,16 +23,17 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.util.concurrent.ListenableFuture;
+/*
 import com.google.mlkit.vision.barcode.BarcodeScanner;
 import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.barcode.common.Barcode;
-import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.common.InputImage;*/
 
 import org.jetbrains.annotations.NonNls;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
+/*
 public class QRCodeScanner extends AppCompatActivity {
 private EditText qrCodeTxt;
 private PreviewView previewView;
@@ -46,15 +48,15 @@ private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
 
         qrCodeTxt = findViewById(R.id.qrCodeTxt);
         previewView = findViewById(R.id.cameraPreview);
-
+/*
         //cheking for camera permisssions
         if(ContextCompat.checkSelfPermission(QRCodeScanner.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
         {init();}
         else {
             ActivityCompat.requestPermissions(QRCodeScanner.this,new String[]{Manifest.permission.CAMERA},101);
         }
-
-    }
+*/
+  /*  }
     private void init(){
         cameraProviderListenableFuture = ProcessCameraProvider.getInstance(QRCodeScanner.this);
         cameraProviderListenableFuture.addListener(new Runnable() {
@@ -125,4 +127,4 @@ private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
 
 
     }
-}
+}*/

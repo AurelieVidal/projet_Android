@@ -1,8 +1,11 @@
 package fr.epf.mm.projet_android;
 
-
+/*
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -30,13 +33,15 @@ public class SimpleScannerActivity extends Activity implements ZXingScannerView.
         mScannerView.stopCamera();           // Stop camera on pause
     }
 
+
+
     @Override
     public void handleResult(Result rawResult) {
         // Do something with the result here
-        Log.v(TAG, rawResult.getText()); // Prints scan results
-        Log.v(TAG, rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
+        Log.v("EPF", rawResult.getText()); // Prints scan results
+        Log.v("EPF", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
         // If you would like to resume scanning, call this method below:
         mScannerView.resumeCameraPreview(this);
     }
-}
+}*/
