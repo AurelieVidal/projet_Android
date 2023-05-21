@@ -31,9 +31,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    repositories {
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        jcenter() // Référentiel JCenter
+        mavenCentral()
+    }
+
 }
 
 dependencies {
+
+
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
