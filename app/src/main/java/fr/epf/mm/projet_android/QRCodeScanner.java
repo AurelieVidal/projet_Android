@@ -1,8 +1,6 @@
 package fr.epf.mm.projet_android;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ExperimentalGetImage;
 import androidx.camera.core.ImageAnalysis;
@@ -14,7 +12,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -41,20 +38,21 @@ private PreviewView previewView;
 
 private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
 
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrcode_scanner);
+        setContentView(R.layout.activity_simple_scanner_action);
 
         qrCodeTxt = findViewById(R.id.qrCodeTxt);
         previewView = findViewById(R.id.cameraPreview);
 
         //cheking for camera permisssions
-        /*if(ContextCompat.checkSelfPermission(QRCodeScanner.this, Manifest.permission.
-        }
+        if(ContextCompat.checkSelfPermission(QRCodeScanner.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
+        {init();}
         else {
             ActivityCompat.requestPermissions(QRCodeScanner.this,new String[]{Manifest.permission.CAMERA},101);
-        }*/
+        }
 
     }
     private void init(){
@@ -91,7 +89,7 @@ private ListenableFuture<ProcessCameraProvider> cameraProviderListenableFuture;
         ImageAnalysis imageAnalysis = new ImageAnalysis.Builder().setTargetResolution(new Size(1280, 720))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build();
 
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(QRCodeScanner.this), new @ExperimentalGetImage @ExperimentalGetImage @ExperimentalGetImage @ExperimentalGetImage ImageAnalysis.Analyzer() {
+        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(QRCodeScanner.this), new ImageAnalysis.Analyzer() {
             @Override
             public void analyze(ImageProxy image) {
                 @SuppressLint("UnsafeOptInUsageError") Image mediaImage =image.getImage();

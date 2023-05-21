@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <fragment
+    <androidx.camera.view.PreviewView
 
-        android:id="@+id/scanner_fragment"
+        android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
     <TextView
+        android:id="@+id/qrCodeTxt"
         android:layout_gravity="center|bottom"
         android:text="Place a barcode in the viewfinder rectangle to scan it."
         android:layout_width="wrap_content"
         android:textColor="#ffffff"
         android:layout_height="wrap_content"/>
-</LinearLayout>
+</FrameLayout>
