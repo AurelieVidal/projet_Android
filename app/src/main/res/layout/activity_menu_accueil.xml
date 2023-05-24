@@ -10,13 +10,13 @@
 
 
     <LinearLayout
-        android:layout_width="418dp"
-        android:layout_height="327dp"
+        android:layout_width="381dp"
+        android:layout_height="501dp"
         android:orientation="vertical"
+        android:padding="16dp"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="183dp"
-        android:padding="16dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="112dp">
 
 
         <TextView
@@ -54,6 +54,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Inscription" />
+
+        <Button
+            android:id="@+id/connexion_menu_accueil_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Connexion" />
+
+        <EditText
+            android:id="@+id/erreur_menu_activitty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+
+            android:text=" Erreur, veuillez retaper vos identifiants ou vous inscrire." />
 
 
     </LinearLayout>

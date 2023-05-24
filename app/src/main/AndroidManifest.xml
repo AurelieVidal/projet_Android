@@ -26,6 +26,12 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InscriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuAccueilActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
