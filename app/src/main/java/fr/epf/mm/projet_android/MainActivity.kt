@@ -69,7 +69,9 @@ class MainActivity : AppCompatActivity() {
 
             }
             R.id.action_search -> {
-                //à remplir
+                val intent = Intent(this, SearchActivity::class.java)
+                intent.putParcelableArrayListExtra("genres", ArrayList(genres))
+                this.startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

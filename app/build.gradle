@@ -68,4 +68,6 @@ dependencies {
 
     //nouvelle dépendance pour le QR Code
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    implementation 'com.github.yuyakaido:CardStackView:v2.3.4'
 }

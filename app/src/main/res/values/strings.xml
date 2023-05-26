@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Projet_Android</string>
+    <string-array name="levels">
+        <item>Popularité</item>
+        <item>Date</item>
+        <item>Note</item>
+    </string-array>
+
+    <string-array name="rangeSlider">
+        <item>0</item>
+        <item>10</item>
+    </string-array>
 </resources>

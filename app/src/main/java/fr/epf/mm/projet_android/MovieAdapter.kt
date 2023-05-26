@@ -143,14 +143,7 @@ class MovieAdapter(val context: Context, val movies: List<Movie>, val IDs: List<
 
 
 
-    fun getStrGenre (genreId: Long, genres: List<Genre>): String {
-        for (genre in genres){
-            if (genre.id==genreId){
-                return genre.name
-            }
-        }
-        return ""
-    }
+
 
     fun View.click(action : (View) -> Unit){
         Log.d("CLICK", "click")
@@ -158,6 +151,14 @@ class MovieAdapter(val context: Context, val movies: List<Movie>, val IDs: List<
     }
 }
 
+fun getStrGenre (genreId: Long, genres: List<Genre>): String {
+    for (genre in genres){
+        if (genre.id==genreId){
+            return genre.name
+        }
+    }
+    return ""
+}
 
 
 

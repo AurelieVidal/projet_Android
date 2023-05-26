@@ -81,7 +81,7 @@ class DetailMovieActivity : AppCompatActivity() {
             if(fav.id ==movie?.id){
                 movie.favori = true
                 val colorStateList = ColorStateList.valueOf(Color.rgb(204,0,0))
-                imageButtonFav.setImageTintList(colorStateList)
+                imageButtonFav.imageTintList = colorStateList
             }
         }
 
