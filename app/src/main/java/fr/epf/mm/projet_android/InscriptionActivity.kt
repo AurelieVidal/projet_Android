@@ -75,7 +75,7 @@ class InscriptionActivity : AppCompatActivity() {
 
 }
 
-private fun GetUtilisateurMemory(context: Context): MutableList<Utilisateur> {
+fun GetUtilisateurMemory(context: Context): MutableList<Utilisateur> {
     val utilisateurs: MutableList<Utilisateur> = mutableListOf()
     val sharedPreferences = context.getSharedPreferences("Utilisateurs", Context.MODE_PRIVATE)
     val utilisateursJson = sharedPreferences.getString("Utilisateurs", null)

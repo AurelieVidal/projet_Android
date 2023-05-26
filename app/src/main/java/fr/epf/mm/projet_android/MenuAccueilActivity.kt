@@ -57,7 +57,7 @@ class MenuAccueilActivity : AppCompatActivity() {
             val pseudo = pseudoTV.text.toString()
             val motDePasse = motDePasseTV.text.toString()
 
-            var utilisateurs = InscriptionActivity.GetUtilisateurMemory(this)
+            var utilisateurs = GetUtilisateurMemory(this)
 
             var estInscrit= false
             Log.d("EPF test", "onCreate: ${pseudo}${motDePasse}${utilisateurs.size}")
@@ -111,6 +111,8 @@ class MenuAccueilActivity : AppCompatActivity() {
 
 
     }
+
+
 
 
 
