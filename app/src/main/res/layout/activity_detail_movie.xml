@@ -324,6 +324,41 @@
                 android:paddingBottom="16dp"
                 />
 
+            <!--Commentaires-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:text="Commentaire"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ligne" />
+
+
+            <TextView
+                android:id="@+id/commentaires_utilisateur_detail_film"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:lineHeight="20sp"
+                android:lineSpacingExtra="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:text="Commentaires"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
+
 
             <!-- Recommandations -->
             <TextView

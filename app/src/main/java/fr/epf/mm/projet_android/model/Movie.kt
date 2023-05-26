@@ -14,7 +14,8 @@ data class Movie (
     val poster_path: String?,
     val backdrop_path: String?,
     val popularity: Float?,
-    val original_language: String
+    val original_language: String,
+
     ) : Parcelable {
 
     var favori: Boolean = false

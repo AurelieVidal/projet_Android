@@ -65,7 +65,7 @@ class InscriptionActivity : AppCompatActivity() {
         editor?.apply()
     }
 
-     fun GetUtilisateurMemory():MutableList<Utilisateur> {
+     public fun GetUtilisateurMemory():MutableList<Utilisateur> {
         val utilisateurs: MutableList<Utilisateur> = mutableListOf()
         val sharedPreferences = getSharedPreferences("Utilisateurs", Context.MODE_PRIVATE)
         val utilisateursJson = sharedPreferences.getString("Utilisateurs", null)
