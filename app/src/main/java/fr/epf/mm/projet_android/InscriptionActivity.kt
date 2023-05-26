@@ -35,10 +35,10 @@ class InscriptionActivity : AppCompatActivity() {
             Log.d("EPF", "onCreate: ${pseudo}${motDePasse}${nom}${prenom}")
 
             //val ancienUtilisateur : List<Utilisateur>
-            val ancienUtilisateurs = GetUtilisateurMemory()
+            val ancienUtilisateurs = GetUtilisateurMemory(this)
             Log.d("EPF2", "utilisateurs en mémoire: ${ancienUtilisateurs.size}")
 
-            val utilisateurN = Utilisateur(ancienUtilisateurs.size,nom,prenom,pseudo,motDePasse,null)
+            val utilisateurN = Utilisateur(ancienUtilisateurs.size,nom,prenom,pseudo,motDePasse,null, null)
             Log.d("EPF3", "nouveau utilisateur: ${utilisateurN.id}${utilisateurN.pseudo}${utilisateurN.motDePasse}")
 
             ancienUtilisateurs.add(utilisateurN)
@@ -65,18 +65,6 @@ class InscriptionActivity : AppCompatActivity() {
         editor?.apply()
     }
 
-     public fun GetUtilisateurMemory():MutableList<Utilisateur> {
-        val utilisateurs: MutableList<Utilisateur> = mutableListOf()
-        val sharedPreferences = getSharedPreferences("Utilisateurs", Context.MODE_PRIVATE)
-        val utilisateursJson = sharedPreferences.getString("Utilisateurs", null)
-        val gson = Gson()
-        if (!utilisateursJson.isNullOrEmpty()) {
-            val utilisateur = gson.fromJson(utilisateursJson, Array<Utilisateur>::class.java).toMutableList()
-            Log.d("EPF", "utilisateurs: $utilisateurs")
-            utilisateurs.addAll(utilisateurs)
-        }
-        return utilisateurs.toMutableList()
-    }
 
     fun View.click(action : (View) -> Unit){
         Log.d("CLICK", "click")
@@ -85,6 +73,19 @@ class InscriptionActivity : AppCompatActivity() {
 
     companion object
 
+}
+
+private fun GetUtilisateurMemory(context: Context): MutableList<Utilisateur> {
+    val utilisateurs: MutableList<Utilisateur> = mutableListOf()
+    val sharedPreferences = context.getSharedPreferences("Utilisateurs", Context.MODE_PRIVATE)
+    val utilisateursJson = sharedPreferences.getString("Utilisateurs", null)
+    val gson = Gson()
+    if (!utilisateursJson.isNullOrEmpty()) {
+        val utilisateur = gson.fromJson(utilisateursJson, Array<Utilisateur>::class.java).toMutableList()
+        Log.d("EPF", "utilisateurs: $utilisateurs")
+        utilisateurs.addAll(utilisateurs)
+    }
+    return utilisateurs
 }
 
 

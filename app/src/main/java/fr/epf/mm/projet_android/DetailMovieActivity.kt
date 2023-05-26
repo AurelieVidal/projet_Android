@@ -1,15 +1,14 @@
 package fr.epf.mm.projet_android
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +16,7 @@ import com.google.gson.Gson
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import fr.epf.mm.projet_android.model.Commentaire
 import fr.epf.mm.projet_android.model.Movie
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -27,12 +27,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailMovieActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
 
         val movie = intent.extras?.get("movie") as? Movie
         val genres = intent.getParcelableArrayListExtra<Genre>("genres")
+        val ajoutCom = findViewById<Button>(R.id.ajout_commentaires_detail_film)
 
         Log.d("EPF", "onCreate: ${movie}")
 
@@ -209,6 +211,10 @@ class DetailMovieActivity : AppCompatActivity() {
                 )
             } }
 
+        ajoutCom.click {
+
+        }
+
 
 
 
@@ -220,6 +226,28 @@ class DetailMovieActivity : AppCompatActivity() {
 
 
     }
+
+    private fun saveComents(Coments: List<Commentaire>) {
+        val gson = Gson()
+
+        val sharedPreferences = getSharedPreferences("Comments", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.clear()
+        editor?.putString("comments", gson.toJson(Coments))
+        editor?.apply()
+    }
+    /*private fun GetCommentsMemory(idUtilisateur : Int) {
+        val comments: MutableList<Movie> = mutableListOf()
+        val sharedPreferences = getSharedPreferences("Comments", Context.MODE_PRIVATE)
+        val oviesmJson = sharedPreferences.getString("movies", null)
+        val gson = Gson()
+        if (!moviesJson.isNullOrEmpty()) { // Vérifie si moviesJson n'est pas null ou vide
+            val movies = gson.fromJson(moviesJson, Array<Movie>::class.java).toMutableList()
+            Log.d("EPF", "Movies: $movies")
+            favoris.addAll(movies)
+        }
+        return favoris.toList()
+    }*/
 
     private fun saveFavorites(favoris: List<Movie>) {
         val gson = Gson()
@@ -332,5 +360,10 @@ class DetailMovieActivity : AppCompatActivity() {
         val hours = minutes?.div(60)
         val remainingMinutes = minutes?.rem(60)
         return "$hours h ${"%02d".format(remainingMinutes)} min"
+    }
+
+    fun View.click(action : (View) -> Unit){
+        Log.d("CLICK", "click")
+        this.setOnClickListener(action)
     }
 }

@@ -11,7 +11,7 @@ data class Utilisateur(
     val pseudo: String,
     val motDePasse: String,
     val favoris: List<Movie>?,
-    val comments:List<Commentaire>
+    val comments: List<Commentaire>?
 ) : Parcelable {
 
 

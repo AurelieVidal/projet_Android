@@ -344,7 +344,7 @@
 
 
             <TextView
-                android:id="@+id/commentaires_utilisateur_detail_film"
+                android:id="@+id/commentaires_detail_film"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:justificationMode="inter_word"
@@ -357,6 +357,13 @@
                 android:text="Commentaires"
                 android:textColor="@color/white"
                 android:textSize="13dp" />
+
+            <Button
+                android:id="@+id/ajout_commentaires_detail_film"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajouter un commentaire"
+                />
 
 
 
