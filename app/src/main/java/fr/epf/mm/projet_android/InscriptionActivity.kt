@@ -61,7 +61,7 @@ class InscriptionActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("utilisateurs", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
         editor?.clear()
-        editor?.putString("utilisateurs: ", gson.toJson(utilisateurs))
+        editor?.putString("utilisateurs", gson.toJson(utilisateurs))
         editor?.apply()
     }
 
@@ -77,13 +77,13 @@ class InscriptionActivity : AppCompatActivity() {
 
 fun GetUtilisateurMemory(context: Context): MutableList<Utilisateur> {
     val utilisateurs: MutableList<Utilisateur> = mutableListOf()
-    val sharedPreferences = context.getSharedPreferences("Utilisateurs", Context.MODE_PRIVATE)
-    val utilisateursJson = sharedPreferences.getString("Utilisateurs", null)
+    val sharedPreferences = context.getSharedPreferences("utilisateurs", Context.MODE_PRIVATE)
+    val utilisateursJson = sharedPreferences.getString("utilisateurs", null)
     val gson = Gson()
     if (!utilisateursJson.isNullOrEmpty()) {
-        val utilisateur = gson.fromJson(utilisateursJson, Array<Utilisateur>::class.java).toMutableList()
-        Log.d("EPF", "utilisateurs: $utilisateurs")
-        utilisateurs.addAll(utilisateurs)
+        val utilisateurMem = gson.fromJson(utilisateursJson, Array<Utilisateur>::class.java).toMutableList()
+        Log.d("EPF", "utilisateurs: $utilisateurMem")
+        utilisateurs.addAll(utilisateurMem)
     }
     return utilisateurs
 }
