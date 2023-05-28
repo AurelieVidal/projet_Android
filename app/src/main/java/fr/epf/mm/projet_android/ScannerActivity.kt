@@ -24,7 +24,6 @@ class ScannerActivity : AppCompatActivity() {
 
     private val barcodeCallback = object : BarcodeCallback {
         override fun barcodeResult(result: BarcodeResult) {
-            // Traitement du résultat du code-barres scanné
             val barcodeValue = result.text
             Log.d("EPF", "barcodeResult: $barcodeValue")
             try {
