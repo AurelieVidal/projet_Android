@@ -18,6 +18,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import fr.epf.mm.projet_android.model.Commentaire
 import fr.epf.mm.projet_android.model.Movie
+import fr.epf.mm.projet_android.model.Utilisateur
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
@@ -198,6 +199,27 @@ class DetailMovieActivity : AppCompatActivity() {
             }
         })
 
+        //Commentaires
+        val commentaireS = findViewById<TextView>(R.id.commentaires_sauvegarde_detail_film)
+        val ancienComment = GetCommentsMemory(movie)
+        Log.d("EPF2", "comments en mémoire: ${ancienComment.size}")
+        commentaireS.setText(ancienComment)
+
+        ajoutCom.click {
+            val commentaire = findViewById<TextView>(R.id.commentaires_detail_film)
+            val comment = commentaire.text.toString()
+
+            val nouveauComment = Commentaire(comment, movie.id,ancienComment.size,idUtilisateur)
+            Log.d("EPF3", "nouveau comment: ${comment}${movie.id}${idUtilisateur}${ancienComment.size}")
+
+            ancienComment.add(nouveauComment)
+            Log.d("EPF4", "ajout nouveau commet: ${ancienComment.size}")
+
+            saveComents(ancienComment)
+
+        }
+
+
         //Recommandations
         val recRecyclerView = findViewById<RecyclerView>(R.id.detail_movies_recyclerview)
 
@@ -211,18 +233,6 @@ class DetailMovieActivity : AppCompatActivity() {
                 )
             } }
 
-        ajoutCom.click {
-
-        }
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -230,24 +240,30 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun saveComents(Coments: List<Commentaire>) {
         val gson = Gson()
 
-        val sharedPreferences = getSharedPreferences("Comments", Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
         editor?.clear()
         editor?.putString("comments", gson.toJson(Coments))
         editor?.apply()
     }
-    /*private fun GetCommentsMemory(idUtilisateur : Int) {
-        val comments: MutableList<Movie> = mutableListOf()
-        val sharedPreferences = getSharedPreferences("Comments", Context.MODE_PRIVATE)
-        val oviesmJson = sharedPreferences.getString("movies", null)
+    private fun GetCommentsMemory(movie: Movie) : List<Commentaire> {
+        var idUtilisateur=GetUtilisateurId(this)
+        val listComments: MutableList<Commentaire> = mutableListOf()
+        val listCommentsIdMovie: MutableList<Commentaire> = mutableListOf()
+        val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
+        val commentsJson = sharedPreferences.getString("comments", null)
         val gson = Gson()
-        if (!moviesJson.isNullOrEmpty()) { // Vérifie si moviesJson n'est pas null ou vide
-            val movies = gson.fromJson(moviesJson, Array<Movie>::class.java).toMutableList()
-            Log.d("EPF", "Movies: $movies")
-            favoris.addAll(movies)
+        if (!commentsJson.isNullOrEmpty()) {
+            val comments = gson.fromJson(commentsJson, Array<Commentaire>::class.java).toMutableList()
+            Log.d("EPF", "Commentaires: $comments")
+            listComments.addAll(comments)
         }
-        return favoris.toList()
-    }*/
+        for (com in listComments){
+            if(com.idMovie==movie.id)
+                listCommentsIdMovie.add(com)
+        }
+        return listCommentsIdMovie.toList()
+    }
 
     private fun saveFavorites(favoris: List<Movie>) {
         val gson = Gson()

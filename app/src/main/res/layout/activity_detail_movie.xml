@@ -341,6 +341,21 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/ligne" />
 
+            <TextView
+                android:id="@+id/commentaires_sauvegarde_detail_film"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:lineHeight="20sp"
+                android:lineSpacingExtra="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="0dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:text="Commentaires sauvegardés"
+                android:textColor="@color/white"
+                android:textSize="13dp" />
+
 
             <TextView
                 android:id="@+id/commentaires_detail_film"

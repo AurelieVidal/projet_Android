@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Commentaire (
     val contenu: String,
     val idMovie: Long,
-val id: Int,
+    val id: Int,
     val idUtilisateur: Int
 
 

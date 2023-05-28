@@ -31,6 +31,8 @@ import fr.epf.mm.projet_android.MainActivity as MainActivity
 
 
 class MenuAccueilActivity : AppCompatActivity() {
+    var idUtilisateur : Int = 0
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +49,6 @@ class MenuAccueilActivity : AppCompatActivity() {
 
 
 // Condition pour activer ou désactiver le bouton
-        //val also = estInscrit.also { connexionButton.isEnabled = it }
-
-
-
         connexionButton.click {
             val pseudoTV = findViewById<TextView>(R.id.pseudo_accueil_menu)
             val motDePasseTV = findViewById<TextView>(R.id.mot_passe_menu_activitty)
@@ -71,6 +69,7 @@ class MenuAccueilActivity : AppCompatActivity() {
 
                 if((pseudo.equals( utils.pseudo)) && (motDePasse.equals(utils.motDePasse))){
                     estInscrit=true
+                    idUtilisateur=utils.id
                 }
             }
 
@@ -89,19 +88,20 @@ class MenuAccueilActivity : AppCompatActivity() {
             val intent = Intent(this, InscriptionActivity::class.java)
             startActivity(intent)
         }
-
-
-
-
     }
     fun View.click(action : (View) -> Unit){
         Log.d("CLICK", "click")
         this.setOnClickListener(action)
     }
-
-
+    fun GetUtilisateurId1(context: Context): Int {
+        return idUtilisateur
+    }
 
     }
+
+
+
+
 
 
 
