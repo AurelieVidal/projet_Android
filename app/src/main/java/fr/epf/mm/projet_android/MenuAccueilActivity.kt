@@ -27,6 +27,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import fr.epf.mm.projet_android.InscriptionActivity as InscriptionActivity
+import fr.epf.mm.projet_android.MainActivity as MainActivity
 
 
 class MenuAccueilActivity : AppCompatActivity() {
@@ -66,7 +67,7 @@ class MenuAccueilActivity : AppCompatActivity() {
 
             //on regarde si l'utilisateur a déjà un compte
             for (utils in utilisateurs){
-                Log.d("EPF", "onCreate: ${pseudo}${motDePasse}${utils.pseudo}${utils.motDePasse}")
+                Log.d("EPF", "onCreate: ${pseudo}${motDePasse} et la suite c'est :${utils.pseudo}${utils.motDePasse}")
 
                 if((pseudo.equals( utils.pseudo)) && (motDePasse.equals(utils.motDePasse))){
                     estInscrit=true
@@ -74,7 +75,9 @@ class MenuAccueilActivity : AppCompatActivity() {
             }
 
             if(estInscrit ){
-            val intent = Intent(this, MainActivity::class.java)
+                Log.d("EPF inscription", "il est connecté")
+
+                val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)}
             else{
                erreur.visibility=View.VISIBLE
@@ -96,18 +99,6 @@ class MenuAccueilActivity : AppCompatActivity() {
         this.setOnClickListener(action)
     }
 
-    /*private fun GetUtilisateurMemory(): List<Utilisateur> {
-        val utilisateurs: MutableList<Utilisateur> = mutableListOf()
-        val sharedPreferences = getSharedPreferences("Utilisateurs", Context.MODE_PRIVATE)
-        val utilisateursJson = sharedPreferences.getString("Utilisateurs", null)
-        val gson = Gson()
-        if (!utilisateursJson.isNullOrEmpty()) {
-            val utilisateur = gson.fromJson(utilisateursJson, Array<Utilisateur>::class.java).toMutableList()
-            Log.d("EPF", "utilisateurs: $utilisateurs")
-            utilisateurs.addAll(utilisateurs)
-        }
-        return utilisateurs.toList()
-    }*/
 
 
     }
