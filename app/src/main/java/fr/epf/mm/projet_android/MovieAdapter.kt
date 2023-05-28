@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.mm.projet_android.model.Movie
+import fr.epf.mm.projet_android.model.Utilisateur
 
 
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view)

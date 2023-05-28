@@ -203,7 +203,7 @@ class DetailMovieActivity : AppCompatActivity() {
         //Commentaires
         val commentaireS = findViewById<TextView>(R.id.commentaires_sauvegarde_detail_film)
         val ancienComment : MutableList<Commentaire>
-       ancienComment = GetCommentsMemory(detail_movie)
+       ancienComment = GetCommentsMemory(movie!!)
         Log.d("EPF2", "comments en mémoire: ${ancienComment.size}")
         for(comment in ancienComment){
         commentaireS.text=comment.contenu}
@@ -249,7 +249,7 @@ class DetailMovieActivity : AppCompatActivity() {
         editor?.putString("comments", gson.toJson(Coments))
         editor?.apply()
     }
-    private fun GetCommentsMemory(movie: MovieD) : MutableList<Commentaire> {
+    private fun GetCommentsMemory(movie: Movie) : MutableList<Commentaire> {
         val listComments: MutableList<Commentaire> = mutableListOf()
         val listCommentsIdMovie: MutableList<Commentaire> = mutableListOf()
         val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)

@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                 this.startActivity(intent)
             }
             R.id.action_QRCode -> {
-                //à remplir
                 val intent = Intent(this, ScannerActivity::class.java)
                 intent.putParcelableArrayListExtra("genres", ArrayList(genres))
                 this.startActivity(intent)

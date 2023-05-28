@@ -78,7 +78,7 @@ class MenuAccueilActivity : AppCompatActivity() {
                 Log.d("EPF inscription", "il est connecté")
 
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putextra("Utilisateur",utilisateur)
+                intent.putExtra("Utilisateur",utilisateur)
             startActivity(intent)}
             else{
                erreur.visibility=View.VISIBLE
