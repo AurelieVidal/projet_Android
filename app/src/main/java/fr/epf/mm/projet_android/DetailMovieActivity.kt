@@ -34,6 +34,7 @@ class DetailMovieActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_movie)
 
         val movie = intent.extras?.get("movie") as? Movie
+        val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         val genres = intent.getParcelableArrayListExtra<Genre>("genres")
         val ajoutCom = findViewById<Button>(R.id.ajout_commentaires_detail_film)
 
@@ -201,16 +202,18 @@ class DetailMovieActivity : AppCompatActivity() {
 
         //Commentaires
         val commentaireS = findViewById<TextView>(R.id.commentaires_sauvegarde_detail_film)
-        val ancienComment = GetCommentsMemory(movie)
+        val ancienComment : MutableList<Commentaire>
+       ancienComment = GetCommentsMemory(detail_movie)
         Log.d("EPF2", "comments en mémoire: ${ancienComment.size}")
-        commentaireS.setText(ancienComment)
+        for(comment in ancienComment){
+        commentaireS.text=comment.contenu}
 
         ajoutCom.click {
             val commentaire = findViewById<TextView>(R.id.commentaires_detail_film)
             val comment = commentaire.text.toString()
 
-            val nouveauComment = Commentaire(comment, movie.id,ancienComment.size,idUtilisateur)
-            Log.d("EPF3", "nouveau comment: ${comment}${movie.id}${idUtilisateur}${ancienComment.size}")
+            val nouveauComment = Commentaire(comment, movie?.id,ancienComment.size,utilisateur?.id)
+            Log.d("EPF3", "nouveau comment: ${comment}${movie?.id}${utilisateur?.id}${ancienComment.size}")
 
             ancienComment.add(nouveauComment)
             Log.d("EPF4", "ajout nouveau commet: ${ancienComment.size}")
@@ -246,8 +249,7 @@ class DetailMovieActivity : AppCompatActivity() {
         editor?.putString("comments", gson.toJson(Coments))
         editor?.apply()
     }
-    private fun GetCommentsMemory(movie: Movie) : List<Commentaire> {
-        var idUtilisateur=GetUtilisateurId(this)
+    private fun GetCommentsMemory(movie: MovieD) : MutableList<Commentaire> {
         val listComments: MutableList<Commentaire> = mutableListOf()
         val listCommentsIdMovie: MutableList<Commentaire> = mutableListOf()
         val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
@@ -259,10 +261,10 @@ class DetailMovieActivity : AppCompatActivity() {
             listComments.addAll(comments)
         }
         for (com in listComments){
-            if(com.idMovie==movie.id)
+            if(com.idMovie==movie?.id)
                 listCommentsIdMovie.add(com)
         }
-        return listCommentsIdMovie.toList()
+        return listCommentsIdMovie
     }
 
     private fun saveFavorites(favoris: List<Movie>) {

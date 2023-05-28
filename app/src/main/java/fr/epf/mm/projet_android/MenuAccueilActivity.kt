@@ -45,6 +45,7 @@ class MenuAccueilActivity : AppCompatActivity() {
         val connexionButton = findViewById<Button>(R.id.connexion_menu_accueil_activity)
         val inscriptionButton = findViewById<Button>(R.id.inscription_menu_accueil_activity)
 
+        val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
 
 
@@ -77,6 +78,7 @@ class MenuAccueilActivity : AppCompatActivity() {
                 Log.d("EPF inscription", "il est connecté")
 
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putextra("Utilisateur",utilisateur)
             startActivity(intent)}
             else{
                erreur.visibility=View.VISIBLE
@@ -93,9 +95,7 @@ class MenuAccueilActivity : AppCompatActivity() {
         Log.d("CLICK", "click")
         this.setOnClickListener(action)
     }
-    fun GetUtilisateurId1(context: Context): Int {
-        return idUtilisateur
-    }
+
 
     }
 

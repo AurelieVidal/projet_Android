@@ -48,6 +48,7 @@ class InscriptionActivity : AppCompatActivity() {
             //Log.d("EPF5", "nouveau utilisateur: ${utilisateurN.id}${utilisateurN.pseudo}${utilisateurN.motDePasse}")
 
             val intent = Intent(this, MenuAccueilActivity::class.java)
+            intent.putextra("utilisateur",utilisateurN)
             startActivity(intent)
         }
 

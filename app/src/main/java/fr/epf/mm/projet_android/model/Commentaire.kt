@@ -4,11 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Commentaire (
+data class Commentaire(
     val contenu: String,
-    val idMovie: Long,
+    val idMovie: Long?,
     val id: Int,
-    val idUtilisateur: Int
+    val idUtilisateur: Int?
 
 
 ) : Parcelable {
