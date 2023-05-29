@@ -357,7 +357,7 @@
                 android:textSize="13dp" />
 
 
-            <TextView
+            <EditText
                 android:id="@+id/commentaires_detail_film"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

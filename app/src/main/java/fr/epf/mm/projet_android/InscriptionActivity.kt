@@ -51,9 +51,6 @@ class InscriptionActivity : AppCompatActivity() {
             intent.putExtra("utilisateur",utilisateurN)
             startActivity(intent)
         }
-
-
-
     }
 
     private fun saveUtilisateur(utilisateurs: List<Utilisateur>) {
