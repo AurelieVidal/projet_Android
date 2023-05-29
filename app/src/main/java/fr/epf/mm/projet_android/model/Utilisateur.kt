@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Utilisateur(
     val id: Int,
-    val nom: String,
-    val prenom: String,
-    val pseudo: String,
+    var nom: String,
+    var prenom: String,
+    var pseudo: String,
     val motDePasse: String,
     val favoris: List<Movie>?,
     val comments: List<Commentaire>?

@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.epf.mm.projet_android.model.Movie
+import fr.epf.mm.projet_android.model.Utilisateur
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
     lateinit var genres: List<Genre>
+    lateinit var utilisateur: Utilisateur
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val PopularRecyclerView  = findViewById<RecyclerView>(R.id.home_popular_recyclerView)
         val TopRecyclerView  = findViewById<RecyclerView>(R.id.home_top_recyclerView)
         val FrRecyclerView  = findViewById<RecyclerView>(R.id.home_fr_recyclerView)
-
+        val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         genres = Genres()
 
 
@@ -75,6 +77,11 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, SearchActivity::class.java)
                 intent.putParcelableArrayListExtra("genres", ArrayList(genres))
                 this.startActivity(intent)
+            }
+            R.id.action_compte -> {
+                val intent = Intent(this, CompteActivity::class.java)
+                intent.putExtra("Utilisateur",utilisateur)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
