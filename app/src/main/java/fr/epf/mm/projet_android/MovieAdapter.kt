@@ -10,18 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.mm.projet_android.model.Movie
-import fr.epf.mm.projet_android.model.Utilisateur
 
 
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-class MovieAdapter(val context: Context, val movies: List<Movie>, val IDs: List<Genre>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(val context: Context, val movies: Movie, val IDs: List<Genre>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 /*
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
 

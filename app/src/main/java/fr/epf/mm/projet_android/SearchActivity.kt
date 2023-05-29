@@ -2,7 +2,6 @@ package fr.epf.mm.projet_android
 
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -20,8 +19,6 @@ import fr.epf.mm.projet_android.model.Movie
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.lang.ProcessBuilder.Redirect
-import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt

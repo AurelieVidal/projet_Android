@@ -8,8 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import fr.epf.mm.projet_android.model.Utilisateur
@@ -30,7 +30,14 @@ class CompteActivity : AppCompatActivity() {
         prenomEditText.text=utilisateur?.prenom
         val pseudoEditText=findViewById<EditText>(R.id.pseudo_compte)
         pseudoEditText.text=utilisateur?.pseudo
+
         val FavoriRecyclerView  = findViewById<RecyclerView>(R.id.liste_film_favori_recyclerView)
+        val layoutManagerPop = LinearLayoutManager(this)
+        for(movie in utilisateur?.favoris!!){
+        layoutManagerPop.orientation = LinearLayoutManager.HORIZONTAL
+        FavoriRecyclerView.layoutManager = layoutManagerPop
+            val genre
+            FavoriRecyclerView.adapter = MovieAdapter(this, movie,genre!!)}
 
         deconnexionButton.click {
             val intent = Intent(this, MenuAccueilActivity::class.java)
