@@ -45,12 +45,12 @@ class MenuAccueilActivity : AppCompatActivity() {
         val connexionButton = findViewById<Button>(R.id.connexion_menu_accueil_activity)
         val inscriptionButton = findViewById<Button>(R.id.inscription_menu_accueil_activity)
 
-        val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
+        var utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
 
 
 // Condition pour activer ou désactiver le bouton
-        connexionButton.click {
+        connexionButton.setOnClickListener{
             val pseudoTV = findViewById<TextView>(R.id.pseudo_accueil_menu)
             val motDePasseTV = findViewById<TextView>(R.id.mot_passe_menu_activitty)
 
@@ -71,6 +71,7 @@ class MenuAccueilActivity : AppCompatActivity() {
                 if((pseudo.equals( utils.pseudo)) && (motDePasse.equals(utils.motDePasse))){
                     estInscrit=true
                     idUtilisateur=utils.id
+                    utilisateur = utils
                 }
             }
 
@@ -78,23 +79,21 @@ class MenuAccueilActivity : AppCompatActivity() {
                 Log.d("EPF inscription", "il est connecté")
 
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("Utilisateur",utilisateur)
-            startActivity(intent)}
+                intent.putExtra("utilisateur",utilisateur)
+                startActivity(intent)
+            }
             else{
                erreur.visibility=View.VISIBLE
             }
         }
 
 
-        inscriptionButton.click {
+        inscriptionButton.setOnClickListener{
             val intent = Intent(this, InscriptionActivity::class.java)
             startActivity(intent)
         }
     }
-    fun View.click(action : (View) -> Unit){
-        Log.d("CLICK", "click")
-        this.setOnClickListener(action)
-    }
+
 
 
     }

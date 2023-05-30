@@ -18,36 +18,37 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 class MainActivity : AppCompatActivity() {
     lateinit var genres: List<Genre>
-    lateinit var utilisateur: Utilisateur
+    private var utilisateur: Utilisateur? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
         val PopularRecyclerView  = findViewById<RecyclerView>(R.id.home_popular_recyclerView)
         val TopRecyclerView  = findViewById<RecyclerView>(R.id.home_top_recyclerView)
         val FrRecyclerView  = findViewById<RecyclerView>(R.id.home_fr_recyclerView)
-        val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
+        utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         genres = Genres()
 
 
         val layoutManagerPop = LinearLayoutManager(this)
         layoutManagerPop.orientation = LinearLayoutManager.HORIZONTAL
         PopularRecyclerView.layoutManager = layoutManagerPop
-        PopularRecyclerView.adapter = MovieAdapter(this, Popular(), genres)
+        PopularRecyclerView.adapter = MovieAdapter(this, Popular(), genres, utilisateur)
 
 
         val layoutManagerTop = LinearLayoutManager(this)
         layoutManagerTop.orientation = LinearLayoutManager.HORIZONTAL
         TopRecyclerView.layoutManager = layoutManagerTop
-        TopRecyclerView.adapter = MovieAdapter(this, TopRated(), genres)
+        TopRecyclerView.adapter = MovieAdapter(this, TopRated(), genres, utilisateur)
 
         val layoutManagerFr = LinearLayoutManager(this)
         layoutManagerFr.orientation = LinearLayoutManager.HORIZONTAL
         FrRecyclerView.layoutManager = layoutManagerFr
-        FrRecyclerView.adapter = MovieAdapter(this, French(), genres)
+        FrRecyclerView.adapter = MovieAdapter(this, French(), genres, utilisateur)
 
     }
 
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_favorites -> {
                 val intent = Intent(this, FavorisActivity::class.java)
                 intent.putParcelableArrayListExtra("genres", ArrayList(genres))
+                intent.putExtra("utilisateur", utilisateur)
                 this.startActivity(intent)
             }
             R.id.action_QRCode -> {
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_search -> {
                 val intent = Intent(this, SearchActivity::class.java)
                 intent.putParcelableArrayListExtra("genres", ArrayList(genres))
+                intent.putExtra("utilisateur", utilisateur)
                 this.startActivity(intent)
             }
             R.id.action_compte -> {
@@ -113,7 +116,6 @@ class MainActivity : AppCompatActivity() {
 
 
             }
-            //checkFav(movies_pop, movies)
 
         }
         return movies_pop

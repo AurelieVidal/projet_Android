@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/m"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    tools:context=".InscriptionActivity"
+    android:gravity="center">
 
 
     <LinearLayout
-        android:layout_width="408dp"
-        android:layout_height="478dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="62dp"
         android:padding="16dp">
 
 
@@ -38,7 +37,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Nom " />
+            android:hint="Nom "
+            android:layout_marginBottom="16dp"/>
 
         <EditText
             android:id="@+id/prenom_creation_compte"
@@ -47,7 +47,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Prenom " />
+            android:hint="Prenom "
+            android:layout_marginBottom="16dp"/>
 
         <EditText
             android:id="@+id/pseudo_creation_compte"
@@ -56,7 +57,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Pseudo" />
+            android:hint="Pseudo"
+            android:layout_marginBottom="16dp"/>
 
         <EditText
             android:id="@+id/mot_passe_creation"
@@ -64,18 +66,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Mot de passe" />
+            android:inputType="textPassword"
+            android:hint="Mot de passe"
+            android:layout_marginBottom="16dp"/>
 
         <Button
             android:id="@+id/creation_compte_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:padding="16dp"
             android:text="Créer mon compte" />
 
 
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

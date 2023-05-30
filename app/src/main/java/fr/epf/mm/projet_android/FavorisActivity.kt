@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import fr.epf.mm.projet_android.model.Movie
+import fr.epf.mm.projet_android.model.Utilisateur
 
 class FavorisActivity : AppCompatActivity() {
     lateinit var favoris: List<Movie>
     lateinit var genres: List<Genre>
+    private var utilisateur : Utilisateur? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favoris)
 
         supportActionBar?.setTitle("Favoris")
+
+        utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
         genres = intent.getParcelableArrayListExtra<Genre>("genres")!!
         favoris = GetFavMemory()
@@ -28,7 +32,7 @@ class FavorisActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         FavRecyclerView.layoutManager = layoutManager
-        FavRecyclerView.adapter = MovieAdapter(this, favoris, genres!!)
+        FavRecyclerView.adapter = MovieAdapter(this, favoris, genres!!, utilisateur)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -51,7 +55,7 @@ class FavorisActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         FavRecyclerView.layoutManager = layoutManager
-        FavRecyclerView.adapter = MovieAdapter(this, favoris, genres!!)
+        FavRecyclerView.adapter = MovieAdapter(this, favoris, genres!!, utilisateur)
     }
 
 

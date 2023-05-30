@@ -2,13 +2,18 @@ package fr.epf.mm.projet_android
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,18 +30,22 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 class DetailMovieActivity : AppCompatActivity() {
+    private var utilisateur : Utilisateur? = null
+    private lateinit var movie: Movie
+
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
 
-        val movie = intent.extras?.get("movie") as? Movie
-        val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
+        movie = intent.extras?.get("movie") as Movie
+        utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         val genres = intent.getParcelableArrayListExtra<Genre>("genres")
-        val ajoutCom = findViewById<Button>(R.id.ajout_commentaires_detail_film)
 
         Log.d("EPF", "onCreate: ${movie}")
 
@@ -200,27 +209,7 @@ class DetailMovieActivity : AppCompatActivity() {
             }
         })
 
-        //Commentaires
-        val commentaireS = findViewById<TextView>(R.id.commentaires_sauvegarde_detail_film)
-        val ancienComment : MutableList<Commentaire>
-       ancienComment = GetCommentsMemory(movie!!)
-        Log.d("EPF2", "comments en mémoire: ${ancienComment.size}")
-        for(comment in ancienComment){
-        commentaireS.text=comment.contenu}
 
-        ajoutCom.click {
-            val commentaire = findViewById<TextView>(R.id.commentaires_detail_film)
-            val comment = commentaire.text.toString()
-
-            val nouveauComment = Commentaire(comment, movie?.id,ancienComment.size,utilisateur?.id)
-            Log.d("EPF3", "nouveau comment: ${comment}${movie?.id}${utilisateur?.id}${ancienComment.size}")
-
-            ancienComment.add(nouveauComment)
-            Log.d("EPF4", "ajout nouveau commet: ${ancienComment.size}")
-
-            saveComents(ancienComment)
-
-        }
 
 
         //Recommandations
@@ -232,7 +221,8 @@ class DetailMovieActivity : AppCompatActivity() {
         recRecyclerView.adapter =
             detail_movie.recommendations?.results?.let { genres?.let { it1 ->
                 MovieAdapter(this, it,
-                    it1
+                    it1,
+                    utilisateur
                 )
             } }
 
@@ -257,7 +247,7 @@ class DetailMovieActivity : AppCompatActivity() {
         val gson = Gson()
         if (!commentsJson.isNullOrEmpty()) {
             val comments = gson.fromJson(commentsJson, Array<Commentaire>::class.java).toMutableList()
-            Log.d("EPF", "Commentaires: $comments")
+            //Log.d("EPF", "Commentaires: $comments")
             listComments.addAll(comments)
         }
         for (com in listComments){
@@ -383,5 +373,23 @@ class DetailMovieActivity : AppCompatActivity() {
     fun View.click(action : (View) -> Unit){
         Log.d("CLICK", "click")
         this.setOnClickListener(action)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_comment -> {
+                val intent = Intent(this, CommentActivity::class.java)
+                Log.d("EPF", "onOptionsItemSelected: $utilisateur")
+                intent.putExtra("utilisateur", utilisateur)
+                intent.putExtra("movie", movie)
+                this.startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

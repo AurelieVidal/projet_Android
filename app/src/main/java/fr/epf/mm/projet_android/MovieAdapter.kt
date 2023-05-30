@@ -13,11 +13,13 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.mm.projet_android.model.Movie
+import fr.epf.mm.projet_android.model.Utilisateur
 
 
 class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-class MovieAdapter(val context: Context, val movies: Movie, val IDs: List<Genre>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieAdapter(val context: Context, val movies: List<Movie>, val IDs: List<Genre>, val utilisateur: Utilisateur?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 /*
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
 
@@ -126,6 +128,7 @@ class MovieAdapter(val context: Context, val movies: Movie, val IDs: List<Genre>
             val intent = Intent(context, DetailMovieActivity::class.java)
             intent.putExtra("movie", movie)
             intent.putParcelableArrayListExtra("genres", ArrayList(IDs))
+            intent.putExtra("utilisateur", utilisateur)
             context.startActivity(intent)
 
 
