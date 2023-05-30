@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_compte -> {
                 val intent = Intent(this, CompteActivity::class.java)
                 intent.putExtra("utilisateur",utilisateur)
+                intent.putParcelableArrayListExtra("genres", ArrayList(genres))
                 startActivity(intent)
             }
         }

@@ -19,8 +19,9 @@ class CompteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_compte)
+        val genres = intent.getParcelableArrayListExtra<Genre>("genres")!!
 
+        setContentView(R.layout.activity_compte)
 
 
         val deconnexionButton = findViewById<Button>(R.id.deconexion_compte)
@@ -40,12 +41,15 @@ class CompteActivity : AppCompatActivity() {
 
 
         val FavoriRecyclerView = findViewById<RecyclerView>(R.id.liste_film_favori_recyclerView)
-        val layoutManagerPop = LinearLayoutManager(this)
-        for (movie in utilisateur?.favoris!!) {
-            layoutManagerPop.orientation = LinearLayoutManager.HORIZONTAL
-            FavoriRecyclerView.layoutManager = layoutManagerPop
-            //val genre
-            //FavoriRecyclerView.adapter = MovieAdapter(this, movie,genre!!)}
+        val layoutManager = LinearLayoutManager(this)
+        val favoris = utilisateur?.favoris
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        FavoriRecyclerView.layoutManager = layoutManager
+        if (favoris != null) {
+            FavoriRecyclerView.adapter = MovieAdapter(this, favoris, genres, utilisateur)
+        }
+
+
 
             deconnexionButton.setOnClickListener {
                 val intent = Intent(this, MenuAccueilActivity::class.java)
@@ -77,7 +81,7 @@ class CompteActivity : AppCompatActivity() {
                 saveUtilisateur(ancienUtilisateurs)
 
             }
-        }
+
 
 
 
