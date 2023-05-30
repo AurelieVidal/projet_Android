@@ -16,9 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.slider.RangeSlider
 import fr.epf.mm.projet_android.model.Movie
+import fr.epf.mm.projet_android.model.Utilisateur
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.lang.ProcessBuilder.Redirect
+import java.text.DecimalFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -35,6 +39,7 @@ class SearchActivity : AppCompatActivity() {
     private var yearLowLimit = 0
     private var voteUpLimit = 10.0
     private var voteLowLimit = 0.0
+    private var utilisateur : Utilisateur? = null
 
 
 
@@ -43,6 +48,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         genres = intent.getParcelableArrayListExtra<Genre>("genres")!!
+        utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
 
         //partie tri : OK
@@ -69,13 +75,13 @@ class SearchActivity : AppCompatActivity() {
                     val moviesTries = trierMoviesParVoteAverage(tri_list)
                     tri_list = moviesTries
                     val filteredMovies = tri_list.filter { movie ->
-                        movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
+                        movie.release_date.isNotEmpty() && movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
                     }
 
                     val layoutManager = LinearLayoutManager(this@SearchActivity)
                     layoutManager.orientation = LinearLayoutManager.VERTICAL
                     RecyclerViewSearch.layoutManager = layoutManager
-                    RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres)
+                    RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres, utilisateur)
                     affichageNbFilms (TextNumber, filteredMovies.size)
 
                 }
@@ -86,13 +92,13 @@ class SearchActivity : AppCompatActivity() {
                         val moviesTries = trierMoviesParPopularity(tri_list)
                         tri_list = moviesTries
                         val filteredMovies = tri_list.filter { movie ->
-                            movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
+                            movie.release_date.isNotEmpty() && movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
                         }
 
                         val layoutManager = LinearLayoutManager(this@SearchActivity)
                         layoutManager.orientation = LinearLayoutManager.VERTICAL
                         RecyclerViewSearch.layoutManager = layoutManager
-                        RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres)
+                        RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres, utilisateur)
                         affichageNbFilms (TextNumber, filteredMovies.size)
                     }
                 } catch (e: java.lang.Exception) {}
@@ -102,13 +108,12 @@ class SearchActivity : AppCompatActivity() {
                     val moviesTries = trierMoviesParDate(tri_list)
                     tri_list = moviesTries
                     val filteredMovies = tri_list.filter { movie ->
-                        movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
+                        movie.release_date.isNotEmpty() && movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
                     }
-
                     val layoutManager = LinearLayoutManager(this@SearchActivity)
                     layoutManager.orientation = LinearLayoutManager.VERTICAL
                     RecyclerViewSearch.layoutManager = layoutManager
-                    RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres)
+                    RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres, utilisateur)
                     affichageNbFilms (TextNumber, filteredMovies.size)
 
                 }
@@ -179,7 +184,7 @@ class SearchActivity : AppCompatActivity() {
                 val layoutManager = LinearLayoutManager(this)
                 layoutManager.orientation = LinearLayoutManager.VERTICAL
                 RecyclerViewSearch.layoutManager = layoutManager
-                val adapter = MovieAdapter(this, movies, genres)
+                val adapter = MovieAdapter(this, movies, genres, utilisateur)
                 RecyclerViewSearch.adapter = adapter
 
                 if (movies.size == 0) {
@@ -263,13 +268,13 @@ class SearchActivity : AppCompatActivity() {
 
                         //ajuster le recycler
                         val filteredMovies = tri_list.filter { movie ->
-                            movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
+                            movie.release_date.isNotEmpty() && movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
                         }
 
                         val layoutManager = LinearLayoutManager(this@SearchActivity)
                         layoutManager.orientation = LinearLayoutManager.VERTICAL
                         RecyclerViewSearch.layoutManager = layoutManager
-                        RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres)
+                        RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres, utilisateur)
                         affichageNbFilms (TextNumber, filteredMovies.size)
 
 
@@ -330,13 +335,13 @@ class SearchActivity : AppCompatActivity() {
                     voteLowLimit = LowValue.text.toString().toDouble()
 
                     val filteredMovies = tri_list.filter { movie ->
-                        movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
+                        movie.release_date.isNotEmpty() && movie.vote_average in voteLowLimit..voteUpLimit && movie.release_date.substring(0, 4).toInt() in yearLowLimit..yearUpLimit
                     }
 
                     val layoutManager = LinearLayoutManager(this@SearchActivity)
                     layoutManager.orientation = LinearLayoutManager.VERTICAL
                     RecyclerViewSearch.layoutManager = layoutManager
-                    RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres)
+                    RecyclerViewSearch.adapter = MovieAdapter(this@SearchActivity, filteredMovies, genres, utilisateur)
                     affichageNbFilms (TextNumber, filteredMovies.size)
 
                 }
@@ -402,9 +407,15 @@ class SearchActivity : AppCompatActivity() {
 
     fun trierMoviesParDate(movies: List<Movie>): List<Movie> {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val defaultDate = Date(Long.MAX_VALUE) // Utilise une date par défaut très éloignée dans le futur
+
         return movies.sortedByDescending { movie ->
-            val date = dateFormat.parse(movie.release_date)
-            date ?: Date(0) // Si la conversion de la date échoue, utilise une date par défaut
+            try {
+                val date = dateFormat.parse(movie.release_date)
+                date ?: defaultDate
+            } catch (e: ParseException) {
+                defaultDate
+            }
         }
     }
 

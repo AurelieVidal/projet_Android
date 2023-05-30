@@ -18,6 +18,7 @@ class CompteActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_compte)
         val deconnexionButton = findViewById<Button>(R.id.deconexion_compte)
         val miseAJourButton=findViewById<Button>(R.id.mise_a_jour_compte)
@@ -68,7 +69,6 @@ class CompteActivity : AppCompatActivity() {
 
             saveUtilisateur(ancienUtilisateurs)
 
-
         }
     }
 
@@ -105,4 +105,3 @@ class CompteActivity : AppCompatActivity() {
 
 
 }
-
