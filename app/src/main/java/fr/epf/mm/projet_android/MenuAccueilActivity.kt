@@ -49,7 +49,7 @@ class MenuAccueilActivity : AppCompatActivity() {
 
 
 
-// Condition pour activer ou désactiver le bouton
+        // Condition pour activer ou désactiver le bouton
         connexionButton.setOnClickListener{
             val pseudoTV = findViewById<TextView>(R.id.pseudo_accueil_menu)
             val motDePasseTV = findViewById<TextView>(R.id.mot_passe_menu_activitty)

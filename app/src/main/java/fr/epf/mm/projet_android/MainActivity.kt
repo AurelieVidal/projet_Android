@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_compte -> {
                 val intent = Intent(this, CompteActivity::class.java)
-                intent.putExtra("Utilisateur",utilisateur)
+                intent.putExtra("utilisateur",utilisateur)
                 startActivity(intent)
             }
         }
