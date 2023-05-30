@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        supportActionBar?.setTitle("Accueil")
+
         utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
         val PopularRecyclerView  = findViewById<RecyclerView>(R.id.home_popular_recyclerView)

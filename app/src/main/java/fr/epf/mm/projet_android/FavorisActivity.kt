@@ -13,7 +13,6 @@ import fr.epf.mm.projet_android.model.Movie
 import fr.epf.mm.projet_android.model.Utilisateur
 
 class FavorisActivity : AppCompatActivity() {
-    lateinit var favoris: List<Movie>
     lateinit var genres: List<Genre>
     private var utilisateur : Utilisateur? = null
 
@@ -25,14 +24,20 @@ class FavorisActivity : AppCompatActivity() {
 
         utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
+        Log.d("EPF", "onCreate: $utilisateur")
         genres = intent.getParcelableArrayListExtra<Genre>("genres")!!
-        favoris = GetFavMemory()
 
-        val FavRecyclerView  = findViewById<RecyclerView>(R.id.favoris_recycler_view)
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        FavRecyclerView.layoutManager = layoutManager
-        FavRecyclerView.adapter = MovieAdapter(this, favoris, genres!!, utilisateur)
+
+        var favoris = getUserFav()
+
+
+        if (favoris != null) {
+            val FavRecyclerView = findViewById<RecyclerView>(R.id.favoris_recycler_view)
+            val layoutManager = LinearLayoutManager(this)
+            layoutManager.orientation = LinearLayoutManager.VERTICAL
+            FavRecyclerView.layoutManager = layoutManager
+            FavRecyclerView.adapter = MovieAdapter(this, favoris!!, genres!!, utilisateur)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,25 +55,29 @@ class FavorisActivity : AppCompatActivity() {
     }
 
     private fun sync() {
-        favoris = GetFavMemory()
-        val FavRecyclerView  = findViewById<RecyclerView>(R.id.favoris_recycler_view)
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        FavRecyclerView.layoutManager = layoutManager
-        FavRecyclerView.adapter = MovieAdapter(this, favoris, genres!!, utilisateur)
+        var favoris = getUserFav()
+
+        if (favoris !=null){
+            val FavRecyclerView  = findViewById<RecyclerView>(R.id.favoris_recycler_view)
+            val layoutManager = LinearLayoutManager(this)
+            layoutManager.orientation = LinearLayoutManager.VERTICAL
+            FavRecyclerView.layoutManager = layoutManager
+            FavRecyclerView.adapter = MovieAdapter(this, favoris!!, genres!!, utilisateur)
+        }
+
     }
 
 
-    private fun GetFavMemory(): List<Movie> {
-        val favoris: MutableList<Movie> = mutableListOf()
-        val sharedPreferences = getSharedPreferences("Favoris", Context.MODE_PRIVATE)
-        val moviesJson = sharedPreferences.getString("movies", null)
-        val gson = Gson()
-        if (!moviesJson.isNullOrEmpty()) { // Vérifie si moviesJson n'est pas null ou vide
-            val movies = gson.fromJson(moviesJson, Array<Movie>::class.java).toMutableList()
-            Log.d("EPF", "Movies: $movies")
-            favoris.addAll(movies)
+    private fun getUserFav() : List<Movie>{
+        val utilisateurs = GetUtilisateurMemory(this)
+        var favs : List<Movie>  = listOf()
+        for (user in utilisateurs){
+            if (user.id == utilisateur?.id){
+                if (user.favoris!= null){
+                    favs =  user.favoris!!
+                }
+            }
         }
-        return favoris.toList()
+        return favs
     }
 }

@@ -1,22 +1,13 @@
 package fr.epf.mm.projet_android
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import fr.epf.mm.projet_android.model.Commentaire
-import fr.epf.mm.projet_android.model.Movie
 import fr.epf.mm.projet_android.model.Utilisateur
 
 

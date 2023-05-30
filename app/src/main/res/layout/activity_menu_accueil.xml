@@ -21,9 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
-            android:paddingBottom="0px"
-            android:text="Connexion"
+            android:paddingHorizontal="16dp"
+            android:text="Bienvenue ! "
             android:textAlignment="center"
             android:textColor="@color/white"
             android:layout_marginBottom="16dp"
@@ -71,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-
+            android:layout_marginHorizontal="16dp"
             android:text=" Erreur, veuillez retaper vos identifiants ou vous inscrire." />
 
 

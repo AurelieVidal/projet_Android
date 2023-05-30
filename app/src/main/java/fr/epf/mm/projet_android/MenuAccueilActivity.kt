@@ -1,30 +1,13 @@
 package fr.epf.mm.projet_android
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import fr.epf.mm.projet_android.model.Movie
 import fr.epf.mm.projet_android.model.Utilisateur
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.util.*
 import fr.epf.mm.projet_android.InscriptionActivity as InscriptionActivity
 import fr.epf.mm.projet_android.MainActivity as MainActivity
@@ -37,6 +20,8 @@ class MenuAccueilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_accueil)
+
+        supportActionBar?.setTitle("Connexion")
 
         val erreur=findViewById<TextView>(R.id.erreur_menu_activitty)
 
@@ -77,10 +62,12 @@ class MenuAccueilActivity : AppCompatActivity() {
 
             if(estInscrit ){
                 Log.d("EPF inscription", "il est connecté")
-
+                erreur.visibility=View.GONE
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("utilisateur",utilisateur)
                 startActivity(intent)
+
+
             }
             else{
                erreur.visibility=View.VISIBLE

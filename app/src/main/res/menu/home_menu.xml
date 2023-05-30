@@ -15,11 +15,11 @@
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/baseline_search_24"
-        android:title="search"
+        android:title="Rechercher un film"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_QRCode"
         android:icon="@drawable/baseline_qr_code_scanner_24"
-        android:title="QRCode"
+        android:title="Scanner un QRCode"
         app:showAsAction="ifRoom" />
 </menu>

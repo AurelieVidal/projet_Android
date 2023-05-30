@@ -5,21 +5,20 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import fr.epf.mm.projet_android.CommentAdapter
+import fr.epf.mm.projet_android.R
 import fr.epf.mm.projet_android.model.Commentaire
 import fr.epf.mm.projet_android.model.Movie
 import fr.epf.mm.projet_android.model.Utilisateur
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CommentActivity : AppCompatActivity() {
@@ -34,14 +33,15 @@ class CommentActivity : AppCompatActivity() {
         val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         val movie = intent.extras?.get("movie") as? Movie
 
+        supportActionBar?.setTitle("${movie?.title}")
 
-        val comments = GetCommentsMemory(movie!!)
-        val commentsM = comments.toMutableList()
+        val commentsInMemory = GetCommentsMemory()
+        val comments : List<Commentaire> = GetCommentsForMovie(commentsInMemory, movie)
 
         var coms : MutableList<Commentaire> = mutableListOf()
         for (com in comments){
 
-            if (com.idMovie == movie.id) {
+            if (com.idMovie == movie?.id) {
                 coms.add(com)
             }
         }
@@ -57,11 +57,13 @@ class CommentActivity : AppCompatActivity() {
         button.setOnClickListener {
             if (utilisateur != null) {
                 Log.d("EPF", "AJOUTER UN COM")
-                updateComments(editText.text.toString(), movie, utilisateur, comments.size, commentsM)
-                val comments = GetCommentsMemory(movie!!)
+                if (movie != null) {
+                    updateComments(editText.text.toString(), movie, utilisateur, commentsInMemory.size, commentsInMemory)
+                }
+                val comments : List<Commentaire> = GetCommentsForMovie(commentsInMemory, movie)
                 var coms : MutableList<Commentaire> = mutableListOf()
                 for (com in comments){
-                    if (com.idMovie == movie.id) {
+                    if (com.idMovie == movie?.id) {
                         coms.add(com)
                         Log.d("EPF", "onCreate: ${com.contenu}")
                     }
@@ -79,6 +81,15 @@ class CommentActivity : AppCompatActivity() {
 
     }
 
+    private fun GetCommentsForMovie(commentsInMemory: MutableList<Commentaire>, movie: Movie?): List<Commentaire> {
+        val list = mutableListOf<Commentaire>()
+        for (comment in commentsInMemory){
+            if (comment.idMovie == movie?.id){
+                list.add(comment)
+            }
+        }
+        return list
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -108,9 +119,8 @@ class CommentActivity : AppCompatActivity() {
 
 
 
-    private fun GetCommentsMemory(movie: Movie) : MutableList<Commentaire> {
+    private fun GetCommentsMemory() : MutableList<Commentaire> {
         val listComments: MutableList<Commentaire> = mutableListOf()
-        val listCommentsIdMovie: MutableList<Commentaire> = mutableListOf()
         val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
         val commentsJson = sharedPreferences.getString("comments", null)
         val gson = Gson()
@@ -119,11 +129,7 @@ class CommentActivity : AppCompatActivity() {
             //Log.d("EPF", "Commentaires: $comments")
             listComments.addAll(comments)
         }
-        for (com in listComments){
-            if(com.idMovie==movie?.id)
-                listCommentsIdMovie.add(com)
-        }
-        return listCommentsIdMovie
+        return listComments
     }
 
     private fun saveComents(Coments: List<Commentaire>) {

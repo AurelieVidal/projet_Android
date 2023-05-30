@@ -1,23 +1,14 @@
 package fr.epf.mm.projet_android
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
 class ActorViewHolder(view: View) : RecyclerView.ViewHolder(view)

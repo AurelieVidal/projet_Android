@@ -21,10 +21,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="16dp"
-            android:paddingBottom="0px"
-            android:text="Inscription"
+            android:paddingHorizontal="16dp"
+            android:text="Créer mon compte"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="28dp" />
@@ -77,6 +75,15 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:text="Créer mon compte" />
+
+        <TextView
+            android:id="@+id/inscription_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:layout_marginHorizontal="16dp"
+            android:text=" Erreur, veuillez retaper vos identifiants ou vous inscrire." />
 
 
     </LinearLayout>

@@ -30,7 +30,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -42,6 +41,9 @@ class DetailMovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_movie)
+
+
+        supportActionBar?.setTitle("Détails du film")
 
         movie = intent.extras?.get("movie") as Movie
         utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
@@ -83,16 +85,18 @@ class DetailMovieActivity : AppCompatActivity() {
         val imageButtonFav = findViewById<ImageButton>(R.id.detail_button_favorite)
 
         //récupérer la liste des favoris en mémoire
-        var favoris = GetFavMemory ()
+        var favoris = getUserFav()
 
 
 
         //l'étoile s'allume si le film est un favori
-        for (fav in favoris){
-            if(fav.id ==movie?.id){
-                movie.favori = true
-                val colorStateList = ColorStateList.valueOf(Color.rgb(204,0,0))
-                imageButtonFav.imageTintList = colorStateList
+        if (favoris != null) {
+            for (fav in favoris){
+                if(fav.id ==movie?.id){
+                    movie.favori = true
+                    val colorStateList = ColorStateList.valueOf(Color.rgb(204,0,0))
+                    imageButtonFav.imageTintList = colorStateList
+                }
             }
         }
 
@@ -114,7 +118,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 //retirer le film de la liste des favoris
 
                 val clone: MutableList<Movie> = mutableListOf()
-                for (fav in favoris){
+                for (fav in favoris!!){
                     if (fav.id!=movie.id){
                         clone.add(fav)
 
@@ -128,7 +132,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 //ajouter le film à la liste des favoris
 
                 val clone: MutableList<Movie> = mutableListOf()
-                clone.addAll(favoris)
+                favoris?.let { it1 -> clone.addAll(it1) }
                 if (movie != null) {
                     clone.add(movie)
                 }
@@ -136,7 +140,12 @@ class DetailMovieActivity : AppCompatActivity() {
 
             }
             //enregistrer la nouvelle liste
-            saveFavorites(favoris)
+            utilisateur?.favoris = favoris
+            saveFavorites()
+
+
+            Log.d("EPF", "favoris de l'utilisateur $favoris")
+
             movie?.favori = !movie?.favori!!
 
         }
@@ -230,55 +239,33 @@ class DetailMovieActivity : AppCompatActivity() {
 
     }
 
-    private fun saveComents(Coments: List<Commentaire>) {
-        val gson = Gson()
+    private fun getUserFav() : List<Movie>{
+        val utilisateurs = GetUtilisateurMemory(this)
+        var favs : List<Movie>  = listOf()
+        for (user in utilisateurs){
+            if (user.id == utilisateur?.id){
+                if (user.favoris!= null){
+                    favs =  user.favoris!!
+                }
 
-        val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
-        editor?.clear()
-        editor?.putString("comments", gson.toJson(Coments))
-        editor?.apply()
-    }
-    private fun GetCommentsMemory(movie: Movie) : MutableList<Commentaire> {
-        val listComments: MutableList<Commentaire> = mutableListOf()
-        val listCommentsIdMovie: MutableList<Commentaire> = mutableListOf()
-        val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
-        val commentsJson = sharedPreferences.getString("comments", null)
-        val gson = Gson()
-        if (!commentsJson.isNullOrEmpty()) {
-            val comments = gson.fromJson(commentsJson, Array<Commentaire>::class.java).toMutableList()
-            //Log.d("EPF", "Commentaires: $comments")
-            listComments.addAll(comments)
+            }
         }
-        for (com in listComments){
-            if(com.idMovie==movie?.id)
-                listCommentsIdMovie.add(com)
+        return favs
+    }
+
+    private fun saveFavorites() {
+        val utilisateurs = GetUtilisateurMemory(this)
+        for (i in utilisateurs.indices) {
+            val user = utilisateurs[i]
+            if (user.id == utilisateur?.id) {
+                utilisateurs[i] = utilisateur!! // Réaffecter la valeur à l'index i
+            }
         }
-        return listCommentsIdMovie
+        Log.d("EPF", "saveFavorites: $utilisateurs")
+        saveUtilisateur(utilisateurs)
     }
 
-    private fun saveFavorites(favoris: List<Movie>) {
-        val gson = Gson()
 
-        val sharedPreferences = getSharedPreferences("Favoris", Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
-        editor?.clear()
-        editor?.putString("movies", gson.toJson(favoris))
-        editor?.apply()
-    }
-
-    private fun GetFavMemory(): List<Movie> {
-        val favoris: MutableList<Movie> = mutableListOf()
-        val sharedPreferences = getSharedPreferences("Favoris", Context.MODE_PRIVATE)
-        val moviesJson = sharedPreferences.getString("movies", null)
-        val gson = Gson()
-        if (!moviesJson.isNullOrEmpty()) { // Vérifie si moviesJson n'est pas null ou vide
-            val movies = gson.fromJson(moviesJson, Array<Movie>::class.java).toMutableList()
-            Log.d("EPF", "Movies: $movies")
-            favoris.addAll(movies)
-        }
-        return favoris.toList()
-    }
 
     private suspend fun getMovieDetails(movieId: Long): MovieD {
         val retrofit = Retrofit.Builder()
@@ -391,5 +378,33 @@ class DetailMovieActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun GetUtilisateurMemory(context: Context): MutableList<Utilisateur> {
+        val utilisateurs: MutableList<Utilisateur> = mutableListOf()
+        val sharedPreferences = context.getSharedPreferences("utilisateurs", Context.MODE_PRIVATE)
+        val utilisateursJson = sharedPreferences.getString("utilisateurs", null)
+        val gson = Gson()
+        if (!utilisateursJson.isNullOrEmpty()) {
+            val utilisateurMem = gson.fromJson(utilisateursJson, Array<Utilisateur>::class.java).toMutableList()
+            Log.d("EPF", "utilisateurs en mémoire : $utilisateurMem")
+            utilisateurs.addAll(utilisateurMem)
+        }
+        return utilisateurs
+    }
+
+    private fun saveUtilisateur(utilisateurs: List<Utilisateur>) {
+        val gson = Gson()
+
+        val sharedPreferences = getSharedPreferences("utilisateurs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.clear()
+        editor?.putString("utilisateurs", gson.toJson(utilisateurs))
+        editor?.apply()
+
+        for (user in utilisateurs){
+            Log.d("EPF", "UTILISATEURS EN M2MOIRE: $user")
+        }
+
     }
 }

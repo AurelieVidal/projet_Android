@@ -20,8 +20,6 @@ import fr.epf.mm.projet_android.model.Utilisateur
 import kotlinx.coroutines.runBlocking
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.lang.ProcessBuilder.Redirect
-import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,6 +44,8 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        supportActionBar?.setTitle("Rechercher")
 
         genres = intent.getParcelableArrayListExtra<Genre>("genres")!!
         utilisateur = intent.extras?.get("utilisateur") as? Utilisateur

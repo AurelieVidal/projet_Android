@@ -48,6 +48,8 @@ class ScannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scanner)
 
+        supportActionBar?.setTitle("QR Code")
+
         IDs = intent.getParcelableArrayListExtra<Genre>("genres")!!
 
         barcodeView = findViewById(R.id.barcodeScannerView)
