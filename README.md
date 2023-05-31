@@ -1,6 +1,9 @@
 # projet_Android
 
 Dans un premier temps, lors du lancement du code, l'utilisateur est envoyé vers une page de connexion.
+<p align="center"> 
+  <img src="https://github.com/AurelieVidal/projet_Android/assets/123561028/8fc49b0a-f915-4680-9dfb-1d37a00b814f" /> </p>
+
 
 ![image](https://github.com/AurelieVidal/projet_Android/assets/123561028/8fc49b0a-f915-4680-9dfb-1d37a00b814f)
 
