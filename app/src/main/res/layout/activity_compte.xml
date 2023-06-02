@@ -1,127 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".MenuAccueilActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".MenuAccueilActivity">
 
 
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="0px"
+        android:text="@string/mes_informations"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
-        >
-        <TextView
-            android:paddingTop="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mes informations"
-            android:textColor="@color/white"
-            android:textSize="28dp"
-            android:paddingBottom="0px"/>
-        <TextView
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ligne" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ligne" />
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:text="Nom"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:paddingBottom="0px"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="0px"
+        android:text="@string/nom"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/nom_compte"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+    <EditText
+        android:id="@+id/nom_compte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
-        <TextView
-            android:paddingLeft="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="Prénom"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:paddingBottom="0px"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="0px"
+        android:text="@string/pr_nom"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/prenom_compte"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+    <EditText
+        android:id="@+id/prenom_compte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
-        <TextView
-            android:paddingLeft="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="Pseudo"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:paddingBottom="0px"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="0px"
+        android:text="@string/pseudo"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/pseudo_compte"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+    <EditText
+        android:id="@+id/pseudo_compte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
-        <Button
-            android:layout_marginHorizontal="16dp"
-            android:id="@+id/mise_a_jour_compte"
-            android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mettre à jour les informations" />
+    <Button
+        android:id="@+id/mise_a_jour_compte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:padding="16dp"
+        android:text="@string/mettre_jour_les_informations" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="Mes favoris"
-            android:textColor="@color/white"
-            android:textSize="28dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/mes_favoris"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
 
-        <TextView
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ligne" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ligne" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/liste_film_favori_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/liste_film_favori_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
-    </LinearLayout>
 
 </LinearLayout>

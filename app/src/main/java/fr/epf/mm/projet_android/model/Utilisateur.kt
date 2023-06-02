@@ -14,8 +14,6 @@ data class Utilisateur(
     val comments: List<Commentaire>?
 ) : Parcelable {
 
-
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

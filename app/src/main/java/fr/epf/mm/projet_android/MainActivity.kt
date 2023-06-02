@@ -29,18 +29,16 @@ class MainActivity : AppCompatActivity() {
 
         utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
-        val PopularRecyclerView  = findViewById<RecyclerView>(R.id.home_popular_recyclerView)
-        val TopRecyclerView  = findViewById<RecyclerView>(R.id.home_top_recyclerView)
-        val FrRecyclerView  = findViewById<RecyclerView>(R.id.home_fr_recyclerView)
+        val PopularRecyclerView = findViewById<RecyclerView>(R.id.home_popular_recyclerView)
+        val TopRecyclerView = findViewById<RecyclerView>(R.id.home_top_recyclerView)
+        val FrRecyclerView = findViewById<RecyclerView>(R.id.home_fr_recyclerView)
         utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         genres = Genres()
-
 
         val layoutManagerPop = LinearLayoutManager(this)
         layoutManagerPop.orientation = LinearLayoutManager.HORIZONTAL
         PopularRecyclerView.layoutManager = layoutManagerPop
         PopularRecyclerView.adapter = MovieAdapter(this, Popular(), genres, utilisateur)
-
 
         val layoutManagerTop = LinearLayoutManager(this)
         layoutManagerTop.orientation = LinearLayoutManager.HORIZONTAL
@@ -51,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         layoutManagerFr.orientation = LinearLayoutManager.HORIZONTAL
         FrRecyclerView.layoutManager = layoutManagerFr
         FrRecyclerView.adapter = MovieAdapter(this, French(), genres, utilisateur)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             R.id.action_QRCode -> {
                 val intent = Intent(this, ScannerActivity::class.java)
                 intent.putParcelableArrayListExtra("genres", ArrayList(genres))
+                intent.putExtra("utilisateur", utilisateur)
                 this.startActivity(intent)
 
             }
@@ -81,18 +79,13 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_compte -> {
                 val intent = Intent(this, CompteActivity::class.java)
-                intent.putExtra("utilisateur",utilisateur)
+                intent.putExtra("utilisateur", utilisateur)
                 intent.putParcelableArrayListExtra("genres", ArrayList(genres))
                 startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
     }
-
-
-
-
-
 
     private fun Popular(): List<Movie> {
         val retrofit = Retrofit.Builder()
@@ -103,9 +96,8 @@ class MainActivity : AppCompatActivity() {
         val service = retrofit.create(TMBDPopular::class.java)
         val apiKey = "31e4672492df89a26175c865fed7271a"
         runBlocking {
-
             movies_pop = service.getMovies(apiKey).results.map {
-                Movie (
+                Movie(
                     it.id,
                     it.title,
                     it.release_date,
@@ -116,29 +108,22 @@ class MainActivity : AppCompatActivity() {
                     it.popularity,
                     it.original_language
                 )
-
-
             }
-
         }
         return movies_pop
     }
-
-
 
     private fun TopRated(): List<Movie> {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
             .baseUrl("https://api.themoviedb.org/3/")
             .build()
-
         var movies_top: List<Movie>
         val service = retrofit.create(TMBDTopRated::class.java)
         val apiKey = "31e4672492df89a26175c865fed7271a"
         runBlocking {
-
             movies_top = service.getMovies(apiKey).results.map {
-                Movie (
+                Movie(
                     it.id,
                     it.title,
                     it.release_date,
@@ -149,12 +134,9 @@ class MainActivity : AppCompatActivity() {
                     it.popularity,
                     it.original_language
                 )
-
             }
         }
-
         return movies_top
-
     }
 
     private fun French(): List<Movie> {
@@ -166,9 +148,8 @@ class MainActivity : AppCompatActivity() {
         val service = retrofit.create(TMBDFrench::class.java)
         val apiKey = "31e4672492df89a26175c865fed7271a"
         runBlocking {
-
             movies_fr = service.getMovies(apiKey).results.map {
-                Movie (
+                Movie(
                     it.id,
                     it.title,
                     it.release_date,
@@ -179,26 +160,22 @@ class MainActivity : AppCompatActivity() {
                     it.popularity,
                     it.original_language
                 )
-
-
             }
         }
         return movies_fr
-
     }
 
-    private fun Genres (): List<Genre> {
+    private fun Genres(): List<Genre> {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
             .baseUrl("https://api.themoviedb.org/3/")
             .build()
-
         val service = retrofit.create(TMDBGenres::class.java)
         val genres: List<Genre>
         runBlocking {
-            val response = service.GetGenresResult()
+            val response = service.getGenresResult()
             genres = response.genres.map {
-                Genre (
+                Genre(
                     it.id,
                     it.name
                 )
@@ -206,17 +183,13 @@ class MainActivity : AppCompatActivity() {
         }
         return genres
     }
-
-
-
 }
 
 fun loadImage(url: String?, imageView: ImageView) {
-    if (url != null){
+    if (url != null) {
         Glide.with(imageView)
             .load("https://image.tmdb.org/t/p/w500$url")
             .into(imageView)
     }
-
 }
 

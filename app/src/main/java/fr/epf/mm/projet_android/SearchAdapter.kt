@@ -1,7 +1,6 @@
 package fr.epf.mm.projet_android
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-
-class GenreViewHolder(view: View, listener: SearchAdapter.OnItemClickListener) : RecyclerView.ViewHolder(view) {
+class GenreViewHolder(view: View, listener: SearchAdapter.OnItemClickListener) :
+    RecyclerView.ViewHolder(view) {
     init {
         itemView.setOnClickListener {
             val position = adapterPosition
@@ -22,7 +21,11 @@ class GenreViewHolder(view: View, listener: SearchAdapter.OnItemClickListener) :
     }
 }
 
-class SearchAdapter(val context: Context, val genres: List<Genre>, private val listener: OnItemClickListener) : RecyclerView.Adapter<GenreViewHolder>() {
+class SearchAdapter(
+    val context: Context,
+    val genres: List<Genre>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<GenreViewHolder>() {
     private var actives: MutableList<Boolean> = MutableList(genres.size) { true }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreViewHolder {
@@ -42,7 +45,6 @@ class SearchAdapter(val context: Context, val genres: List<Genre>, private val l
         val backgroundColorInactive = ContextCompat.getColor(context, R.color.background)
         val backgroundColorActive = ContextCompat.getColor(context, R.color.light_gray)
         val isCardActive = actives[position]
-
         if (isCardActive) {
             textViewContent.setBackgroundColor(backgroundColorActive)
         } else {
@@ -53,10 +55,8 @@ class SearchAdapter(val context: Context, val genres: List<Genre>, private val l
             actives[position] = !actives[position]
             if (actives[position]) {
                 textViewContent.setBackgroundColor(backgroundColorActive)
-                Log.d("EPF", "ON REACTIVE")
             } else {
                 textViewContent.setBackgroundColor(backgroundColorInactive)
-                Log.d("EPF", "ON DESACTIVE")
             }
             listener.onItemColorChanged(position, actives[position])
         }

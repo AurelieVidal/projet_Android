@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailMovieActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".DetailMovieActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -21,24 +21,22 @@
                 android:layout_height="wrap_content">
 
 
-                <!-- Image de fond - Backdrop -->
                 <ImageView
                     android:id="@+id/detail_background"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:foreground="#20000000"
-                    android:scaleType="centerCrop"/>
-                <!-- Image du poster superposée sur l'image de fond -->
+                    android:scaleType="centerCrop" />
+
                 <ImageView
                     android:id="@+id/detail_poster"
                     android:layout_width="150dp"
                     android:layout_height="225dp"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="40dp"
                     android:background="@drawable/rounded_corner"
                     android:clipToOutline="true"
-                    android:scaleType="fitXY"
-                    />
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/detail_vote"
@@ -48,8 +46,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginBottom="1dp"
                     android:layout_toEndOf="@+id/detail_poster"
-                    android:text="75 %"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -69,15 +66,13 @@
             </RelativeLayout>
 
 
-            <!-- Titre du film -->
             <TextView
                 android:id="@+id/detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="Titre du film"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -95,9 +90,8 @@
                     android:paddingTop="0dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="16dp"
-                    android:text="21/04/2023"
                     android:textColor="@color/light_gray"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="italic" />
 
                 <TextView
@@ -110,24 +104,22 @@
                     android:paddingTop="0dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="16dp"
-                    android:text="2h2"
                     android:textColor="@color/light_gray"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="italic" />
 
             </LinearLayout>
 
 
-            <!-- Résumé du film -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingTop="0dp"
                 android:paddingRight="16dp"
-                android:text="Résumé"
+                android:text="@string/r_sum"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -148,21 +140,19 @@
                 android:paddingTop="0dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"
-                android:text="Résumé du film"
                 android:textColor="@color/white"
-                android:textSize="13dp" />
+                android:textSize="13sp" />
 
 
-            <!-- Informations en chiffres -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingTop="0dp"
                 android:paddingRight="16dp"
-                android:text="Informations"
+                android:text="@string/informations"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -188,9 +178,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Budget"
+                        android:text="@string/budget"
                         android:textColor="@color/white"
-                        android:textSize="13dp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/detail_budget"
@@ -198,17 +188,16 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:paddingRight="16dp"
-                        android:text="200 000 0000 €"
                         android:textColor="@color/light_gray"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Recette"
+                        android:text="@string/recette"
                         android:textColor="@color/white"
-                        android:textSize="13dp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/detail_revenue"
@@ -216,9 +205,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:paddingRight="16dp"
-                        android:text="200 000 0000 €"
                         android:textColor="@color/light_gray"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="italic" />
 
                 </LinearLayout>
@@ -234,9 +222,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Langue de la VO"
+                        android:text="@string/langue_de_la_vo"
                         android:textColor="@color/white"
-                        android:textSize="13dp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/detail_vo"
@@ -244,17 +232,16 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:paddingRight="16dp"
-                        android:text="Anglais"
                         android:textColor="@color/light_gray"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="italic" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Genre"
+                        android:text="@string/genre"
                         android:textColor="@color/white"
-                        android:textSize="13dp" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/detail_genres"
@@ -262,9 +249,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:paddingRight="16dp"
-                        android:text="action, animaion, horreur"
                         android:textColor="@color/light_gray"
-                        android:textSize="13dp"
+                        android:textSize="13sp"
                         android:textStyle="italic" />
 
                 </LinearLayout>
@@ -273,16 +259,15 @@
             </LinearLayout>
 
 
-            <!-- Casting -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingTop="0dp"
                 android:paddingRight="16dp"
-                android:text="Casting"
+                android:text="@string/casting"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -292,7 +277,6 @@
                 android:background="@drawable/ligne" />
 
 
-            <!-- Bande Annonce-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/detail_actors_recyclerview"
                 android:layout_width="match_parent"
@@ -306,9 +290,9 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="0dp"
                 android:paddingRight="16dp"
-                android:text="Bande Annonce"
+                android:text="@string/bande_annonce"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -321,20 +305,18 @@
                 android:id="@+id/detail_youtube_player_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                />
+                android:paddingBottom="16dp" />
 
 
-            <!-- Recommandations -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingTop="0dp"
                 android:paddingRight="16dp"
-                android:text="Recommandations"
+                android:text="@string/recommandations"
                 android:textColor="@color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -351,6 +333,4 @@
                 android:paddingBottom="16dp" />
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

@@ -4,15 +4,12 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import fr.epf.mm.projet_android.CommentAdapter
-import fr.epf.mm.projet_android.R
 import fr.epf.mm.projet_android.model.Commentaire
 import fr.epf.mm.projet_android.model.Movie
 import fr.epf.mm.projet_android.model.Utilisateur
@@ -29,24 +26,22 @@ class CommentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment)
 
-
         val utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
         val movie = intent.extras?.get("movie") as? Movie
 
         supportActionBar?.setTitle("${movie?.title}")
 
         val commentsInMemory = GetCommentsMemory()
-        val comments : List<Commentaire> = GetCommentsForMovie(commentsInMemory, movie)
+        val comments: List<Commentaire> = GetCommentsForMovie(commentsInMemory, movie)
 
-        var coms : MutableList<Commentaire> = mutableListOf()
-        for (com in comments){
-
+        val coms: MutableList<Commentaire> = mutableListOf()
+        for (com in comments) {
             if (com.idMovie == movie?.id) {
                 coms.add(com)
             }
         }
-        val trie = trierCommentsParDate (coms)
-        RecyclerView  = findViewById<RecyclerView>(R.id.comment_recycler_view)
+        val trie = trierCommentsParDate(coms)
+        RecyclerView = findViewById(R.id.comment_recycler_view)
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         RecyclerView.layoutManager = layoutManager
@@ -56,56 +51,65 @@ class CommentActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.comment_content)
         button.setOnClickListener {
             if (utilisateur != null) {
-                Log.d("EPF", "AJOUTER UN COM")
                 if (movie != null) {
-                    updateComments(editText.text.toString(), movie, utilisateur, commentsInMemory.size, commentsInMemory)
+                    updateComments(
+                        editText.text.toString(),
+                        movie,
+                        utilisateur,
+                        commentsInMemory.size,
+                        commentsInMemory
+                    )
                 }
-                val comments : List<Commentaire> = GetCommentsForMovie(commentsInMemory, movie)
-                var coms : MutableList<Commentaire> = mutableListOf()
-                for (com in comments){
+
+                val comments: List<Commentaire> = GetCommentsForMovie(commentsInMemory, movie)
+
+                val coms: MutableList<Commentaire> = mutableListOf()
+                for (com in comments) {
                     if (com.idMovie == movie?.id) {
                         coms.add(com)
-                        Log.d("EPF", "onCreate: ${com.contenu}")
                     }
                 }
-                val trie = trierCommentsParDate (coms)
+                val trie = trierCommentsParDate(coms)
                 val layoutManager = LinearLayoutManager(this)
                 layoutManager.orientation = LinearLayoutManager.VERTICAL
                 RecyclerView.layoutManager = layoutManager
                 RecyclerView.adapter = CommentAdapter(this, trie)
                 editText.setText("")
             }
-
         }
-
-
     }
 
-    private fun GetCommentsForMovie(commentsInMemory: MutableList<Commentaire>, movie: Movie?): List<Commentaire> {
+    private fun GetCommentsForMovie(
+        commentsInMemory: MutableList<Commentaire>,
+        movie: Movie?
+    ): List<Commentaire> {
         val list = mutableListOf<Commentaire>()
-        for (comment in commentsInMemory){
-            if (comment.idMovie == movie?.id){
+        for (comment in commentsInMemory) {
+            if (comment.idMovie == movie?.id) {
                 list.add(comment)
             }
         }
         return list
     }
 
-
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun updateComments(content: String, movie: Movie, user: Utilisateur, id: Int, comments: MutableList<Commentaire>) {
-        val commentaire = Commentaire(content, movie.id, id, user.id, LocalDateTime.now().toString())
-        Log.d("EPF", "updateComments: $commentaire")
+    private fun updateComments(
+        content: String,
+        movie: Movie,
+        user: Utilisateur,
+        id: Int,
+        comments: MutableList<Commentaire>
+    ) {
+        val commentaire =
+            Commentaire(content, movie.id, id, user.id, LocalDateTime.now().toString())
         comments.add(commentaire)
         saveComents(comments)
     }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun trierCommentsParDate(comments: MutableList<Commentaire>): List<Commentaire> {
         val dateFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
         val defaultDate = Date(Long.MAX_VALUE)
-
         return comments.sortedByDescending {
             try {
                 val date = dateFormatter.parse(it.date)
@@ -116,17 +120,14 @@ class CommentActivity : AppCompatActivity() {
         }
     }
 
-
-
-
-    private fun GetCommentsMemory() : MutableList<Commentaire> {
+    private fun GetCommentsMemory(): MutableList<Commentaire> {
         val listComments: MutableList<Commentaire> = mutableListOf()
         val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
         val commentsJson = sharedPreferences.getString("comments", null)
         val gson = Gson()
         if (!commentsJson.isNullOrEmpty()) {
-            val comments = gson.fromJson(commentsJson, Array<Commentaire>::class.java).toMutableList()
-            //Log.d("EPF", "Commentaires: $comments")
+            val comments =
+                gson.fromJson(commentsJson, Array<Commentaire>::class.java).toMutableList()
             listComments.addAll(comments)
         }
         return listComments
@@ -134,13 +135,10 @@ class CommentActivity : AppCompatActivity() {
 
     private fun saveComents(Coments: List<Commentaire>) {
         val gson = Gson()
-
         val sharedPreferences = getSharedPreferences("comments", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
         editor?.clear()
         editor?.putString("comments", gson.toJson(Coments))
         editor?.apply()
     }
-
-
 }

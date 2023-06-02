@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommentActivity"
-    android:orientation="vertical"
     android:background="@color/background"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".CommentActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/comment_recycler_view"
-        android:layout_weight="1"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 
     <EditText
         android:id="@+id/comment_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ecrivez un commentaire"
+        android:hint="@string/comment_hint"
         android:textColor="@color/white"
         android:textColorHint="@color/light_gray"
-        android:textSize="16dp"
-        />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/comment_add_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter un commentaire"
-        android:padding="16dp"
         android:layout_margin="8dp"
-        />
+        android:padding="16dp"
+        android:text="@string/ajouter_un_commentaire" />
 
 </LinearLayout>

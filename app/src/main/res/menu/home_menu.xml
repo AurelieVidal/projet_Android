@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_compte"
         android:icon="@drawable/compte_item"
-        android:title="Compte"
+        android:title="@string/compte"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_favorites"
         android:icon="@drawable/baseline_star_24"
-        android:title="Favorites"
+        android:title="@string/favorites"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/baseline_search_24"
-        android:title="Rechercher un film"
+        android:title="@string/rechercher_un_film"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_QRCode"
         android:icon="@drawable/baseline_qr_code_scanner_24"
-        android:title="Scanner un QRCode"
+        android:title="@string/scanner_un_qrcode"
         app:showAsAction="ifRoom" />
 </menu>

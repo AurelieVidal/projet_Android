@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class CustomSpinnerAdapter(context: Context, private val items: List<String>, private val textColor: Int) :
+class CustomSpinnerAdapter(context: Context, items: List<String>, private val textColor: Int) :
     ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, items) {
-
     private var isDialogOpen = false
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -23,17 +22,15 @@ class CustomSpinnerAdapter(context: Context, private val items: List<String>, pr
         val view = super.getDropDownView(position, convertView, parent)
         val textView = view.findViewById<TextView>(android.R.id.text1)
 
-        // Appliquer la couleur de texte appropriée en fonction de l'état de la boîte de dialogue
         if (isDialogOpen) {
             textView.setTextColor(Color.BLACK)
-            textView.gravity = Gravity.CENTER // Centrer le texte dans la boîte de dialogue
-            view.setPadding(16, 32, 16, 32) // Ajouter un rembourrage aux éléments de la boîte de dialogue
+            textView.gravity = Gravity.CENTER
+            view.setPadding(16, 32, 16, 32)
         } else {
             textView.setTextColor(textColor)
-            textView.gravity = Gravity.CENTER // Centrer le texte dans la boîte de dialogue
-            view.setPadding(16, 16, 16, 16) // Ajouter un rembourrage aux éléments de la boîte de dialogue
+            textView.gravity = Gravity.CENTER
+            view.setPadding(16, 16, 16, 16)
         }
-
         return view
     }
 
@@ -42,6 +39,3 @@ class CustomSpinnerAdapter(context: Context, private val items: List<String>, pr
         notifyDataSetChanged()
     }
 }
-
-
-

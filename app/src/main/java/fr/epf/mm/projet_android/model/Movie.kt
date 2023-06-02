@@ -3,9 +3,8 @@ package fr.epf.mm.projet_android.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-
 @Parcelize
-data class Movie (
+data class Movie(
     val id: Long,
     val title: String,
     val release_date: String,
@@ -19,7 +18,6 @@ data class Movie (
     ) : Parcelable {
 
     var favori: Boolean = false
-
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -3,7 +3,6 @@ package fr.epf.mm.projet_android
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +11,8 @@ import java.util.*
 import fr.epf.mm.projet_android.InscriptionActivity as InscriptionActivity
 import fr.epf.mm.projet_android.MainActivity as MainActivity
 
-
 class MenuAccueilActivity : AppCompatActivity() {
-    var idUtilisateur : Int = 0
+    var idUtilisateur: Int = 0
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,67 +21,46 @@ class MenuAccueilActivity : AppCompatActivity() {
 
         supportActionBar?.setTitle("Connexion")
 
-        val erreur=findViewById<TextView>(R.id.erreur_menu_activitty)
+        var utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
 
-        erreur.visibility=View.GONE
+        val erreur = findViewById<TextView>(R.id.erreur_menu_activitty)
+        erreur.visibility = View.GONE
 
         val connexionButton = findViewById<Button>(R.id.connexion_menu_accueil_activity)
         val inscriptionButton = findViewById<Button>(R.id.inscription_menu_accueil_activity)
-
-        var utilisateur = intent.extras?.get("utilisateur") as? Utilisateur
-
-
-
-        // Condition pour activer ou désactiver le bouton
-        connexionButton.setOnClickListener{
+        connexionButton.setOnClickListener {
             val pseudoTV = findViewById<TextView>(R.id.pseudo_accueil_menu)
             val motDePasseTV = findViewById<TextView>(R.id.mot_passe_menu_activitty)
-
             val pseudo = pseudoTV.text.toString()
             val motDePasse = motDePasseTV.text.toString()
 
-            var utilisateurs = GetUtilisateurMemory(this)
+            val utilisateurs = GetUtilisateurMemory(this)
+            var estInscrit = false
 
-            var estInscrit= false
-            Log.d("EPF test", "onCreate: ${pseudo}${motDePasse}${utilisateurs.size}")
-
-
-
-            //on regarde si l'utilisateur a déjà un compte
-            for (utils in utilisateurs){
-                Log.d("EPF", "onCreate: ${pseudo}${motDePasse} et la suite c'est :${utils.pseudo}${utils.motDePasse}")
-
-                if((pseudo.equals( utils.pseudo)) && (motDePasse.equals(utils.motDePasse))){
-                    estInscrit=true
-                    idUtilisateur=utils.id
+            for (utils in utilisateurs) {
+                if ((pseudo.equals(utils.pseudo)) && (motDePasse.equals(utils.motDePasse))) {
+                    estInscrit = true
+                    idUtilisateur = utils.id
                     utilisateur = utils
                 }
             }
 
-            if(estInscrit ){
-                Log.d("EPF inscription", "il est connecté")
-                erreur.visibility=View.GONE
+            if (estInscrit) {
+                erreur.visibility = View.GONE
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("utilisateur",utilisateur)
+                intent.putExtra("utilisateur", utilisateur)
                 startActivity(intent)
-
-
-            }
-            else{
-               erreur.visibility=View.VISIBLE
+            } else {
+                erreur.visibility = View.VISIBLE
             }
         }
 
-
-        inscriptionButton.setOnClickListener{
+        inscriptionButton.setOnClickListener {
             val intent = Intent(this, InscriptionActivity::class.java)
             startActivity(intent)
         }
     }
-
-
-
-    }
+}
 
 
 

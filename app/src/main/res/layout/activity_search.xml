@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity"
-    android:orientation="vertical"
     android:background="@color/background"
-    >
+    android:orientation="vertical"
+    tools:context=".SearchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <EditText
@@ -21,76 +19,71 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10"
-            android:textColor="@color/white"
-            android:hint="Rechercher"
-            android:textColorHint="@color/light_gray"
             android:backgroundTint="@color/white"
+            android:ems="10"
+            android:hint="@string/rechercher"
             android:inputType="text"
-            />
+            android:textColor="@color/white"
+            android:textColorHint="@color/light_gray" />
 
         <ImageButton
             android:id="@+id/search_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/baseline_search_24"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_search_24" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/search_filter_layout"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler_genres"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/search_recycler_genres"
-            android:layout_weight="1"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:layout_weight="1" />
 
         <ImageButton
             android:id="@+id/search_filter_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/baseline_filter_list_24"
-            android:background="@android:color/transparent"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
-            />
-
+            android:background="@android:color/transparent"
+            android:src="@drawable/baseline_filter_list_24" />
 
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/search_sort_layout"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trier les résultats par"
+            android:text="@string/trier_les_r_sultats_par"
             android:textColor="@color/light_gray"
-            android:textSize="16dp"/>
+            android:textSize="16sp" />
 
         <Spinner
-            android:spinnerMode="dialog"
+            android:id="@+id/search_sort_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/search_sort_spinner"
-            android:entries="@array/levels"
             android:backgroundTint="@color/light_gray"
-            />
-
+            android:entries="@array/levels"
+            android:spinnerMode="dialog" />
 
 
     </LinearLayout>
@@ -100,17 +93,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
         android:paddingTop="8dp"
+        android:paddingRight="16dp"
         android:paddingBottom="8dp"
         android:textColor="@color/light_gray"
-        android:textStyle="italic"/>
+        android:textStyle="italic" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
+        android:layout_height="match_parent" />
 
 </LinearLayout>

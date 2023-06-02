@@ -1,4 +1,5 @@
 package fr.epf.mm.projet_android
+
 import android.os.Parcelable
 import fr.epf.mm.projet_android.model.Movie
 import kotlinx.parcelize.Parcelize
@@ -8,23 +9,22 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TMBDPopular {
-
-    @GET("movie/popular?api_key=31e4672492df89a26175c865fed7271a&language=fr")
-    suspend fun getMovies(@Query("api_key") apiKey: String): GetMoviesResult
-
-
+    @GET("movie/popular")
+    suspend fun getMovies(
+        @Query("api_key") apiKey: String = "31e4672492df89a26175c865fed7271a",
+        @Query("language") language: String = "fr"
+    ): GetMoviesResult
 }
 
 interface TMBDTopRated {
-
-    @GET("movie/top_rated?api_key=31e4672492df89a26175c865fed7271a&language=fr")
-    suspend fun getMovies(@Query("api_key") apiKey: String): GetMoviesResult
-
-
+    @GET("movie/top_rated")
+    suspend fun getMovies(
+        @Query("api_key") apiKey: String = "31e4672492df89a26175c865fed7271a",
+        @Query("language") language: String = "fr"
+    ): GetMoviesResult
 }
 
 interface TMBDSearch {
-
     @GET("search/movie")
     suspend fun getMovies(
         @Query("query") query: String,
@@ -34,28 +34,24 @@ interface TMBDSearch {
 }
 
 interface TMBDFrench {
-
-    @GET("discover/movie?api_key=31e4672492df89a26175c865fed7271a&language=fr-FR&sort_by=release_date.desc&with_original_language=fr&vote_count.gte=50")
-    suspend fun getMovies(@Query("api_key") apiKey: String): GetMoviesResult
-
-
+    @GET("discover/movie")
+    suspend fun getMovies(
+        @Query("api_key") apiKey: String = "31e4672492df89a26175c865fed7271a",
+        @Query("language") language: String = "fr-FR",
+        @Query("sort_by") sortBy: String = "release_date.desc",
+        @Query("with_original_language") originalLanguage: String = "fr",
+        @Query("vote_count.gte") minVoteCount: Int = 50
+    ): GetMoviesResult
 }
-/*
-interface TMBDTest {
 
-    @GET("movie/{id}?api_key=31e4672492df89a26175c865fed7271a")
-    suspend fun getMovies(@Path("id") id: Long, @Query("api_key") apiKey: String) : GetMoviesResult
-
-
-}*/
-data class GetMoviesResult (val results: List<Movie>)
+data class GetMoviesResult(val results: List<Movie>)
 
 interface TMDBGenres {
-
-    @GET("genre/movie/list?api_key=31e4672492df89a26175c865fed7271a&language=fr")
-    suspend fun GetGenresResult(): GetGenresResult
-
-
+    @GET("genre/movie/list")
+    suspend fun getGenresResult(
+        @Query("api_key") apiKey: String = "31e4672492df89a26175c865fed7271a",
+        @Query("language") language: String = "fr"
+    ): GetGenresResult
 }
 
 @Parcelize
@@ -71,6 +67,7 @@ interface MovieApi {
         @Query("append_to_response") appendToResponse: String
     ): Response<MovieD>
 }
+
 data class MovieD(
     val genres: List<Genre>?,
     val overview: String?,
@@ -147,7 +144,3 @@ enum class TmdbLanguage(val fullName: String) {
         }
     }
 }
-
-
-
-

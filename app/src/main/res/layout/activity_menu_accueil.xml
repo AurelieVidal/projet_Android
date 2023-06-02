@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/m"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="@color/background"
+    android:gravity="center"
     tools:context=".MenuAccueilActivity">
 
 
@@ -20,33 +19,33 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:paddingHorizontal="16dp"
-            android:text="Bienvenue ! "
+            android:text="@string/bienvenue"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:layout_marginBottom="16dp"
-            android:textSize="28dp" />
+            android:textSize="28sp" />
 
         <EditText
             android:id="@+id/pseudo_accueil_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:layout_marginBottom="16dp"
-            android:hint="Pseudo" />
+            android:hint="@string/pseudo_connexion"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/mot_passe_menu_activitty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:layout_marginBottom="16dp"
-            android:inputType="textPassword"
-            android:hint=" Mot de passe" />
+            android:hint="@string/mot_de_passe_connexion"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/inscription_menu_accueil_activity"
@@ -54,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="16dp"
-            android:text="Inscription" />
+            android:text="@string/inscription_connexion" />
 
         <Button
             android:id="@+id/connexion_menu_accueil_activity"
@@ -62,16 +61,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="16dp"
-            android:text="Connexion" />
+            android:text="@string/connexion" />
 
         <TextView
             android:id="@+id/erreur_menu_activitty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:layout_marginHorizontal="16dp"
-            android:text=" Erreur, veuillez retaper vos identifiants ou vous inscrire." />
+            android:text="@string/connesion_error" />
 
 
     </LinearLayout>

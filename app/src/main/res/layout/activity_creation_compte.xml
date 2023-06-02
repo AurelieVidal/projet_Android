@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/m"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".InscriptionActivity"
-    android:gravity="center">
-
+    android:gravity="center"
+    tools:context=".InscriptionActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,51 +20,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
-            android:text="Créer mon compte"
+            android:text="@string/cr_er_mon_compte"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="28dp" />
+            android:textSize="28sp" />
 
 
         <EditText
             android:id="@+id/nom_creation_compte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Nom "
-            android:layout_marginBottom="16dp"/>
+            android:hint="@string/nom_hint"
+            android:inputType="textCapWords" />
 
         <EditText
             android:id="@+id/prenom_creation_compte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Prenom "
-            android:layout_marginBottom="16dp"/>
+            android:hint="@string/pr_nom_hint"
+            android:inputType="textCapWords" />
 
         <EditText
             android:id="@+id/pseudo_creation_compte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Pseudo"
-            android:layout_marginBottom="16dp"/>
+            android:hint="@string/pseudo_hint"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/mot_passe_creation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPassword"
-            android:hint="Mot de passe"
-            android:layout_marginBottom="16dp"/>
+            android:hint="@string/mot_de_passe"
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/creation_compte_activity"
@@ -74,16 +72,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="16dp"
-            android:text="Créer mon compte" />
+            android:text="@string/cr_er_mon_compte_button" />
 
         <TextView
             android:id="@+id/inscription_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:layout_marginHorizontal="16dp"
-            android:text=" Erreur, veuillez retaper vos identifiants ou vous inscrire." />
+            android:text="@string/error_text" />
 
 
     </LinearLayout>
