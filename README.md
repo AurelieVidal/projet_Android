@@ -5,7 +5,7 @@ Dans un premier temps, lors du lancement du code, l'utilisateur est envoyé vers
   <img src="https://github.com/AurelieVidal/projet_Android/assets/123561028/8fc49b0a-f915-4680-9dfb-1d37a00b814f" /> 
 </p>
 Il doit rentrer son pseudo et son nom d'utilisateur.
-S'il n'a pas de compte il doit s'inscrire. Lorsque l'utilisateur appuie sur le bouton inscription, il est renvoyé vers une page où il doit entrer ses informations personnelles tel que son nom, son prenom, son pseudo et le mot de passe choisit.
+S'il n'a pas de compte il doit s'inscrire. Lorsque l'utilisateur appuie sur le bouton inscription, il est renvoyé vers une page où il doit entrer ses informations personnelles tel que son nom, son prenom, son pseudo et le mot de passe choisit. Des contraintes ont été ajouté afin que le pseudo reste unique et que tous les champs soient remplis lors d'une création de compte.
 <p align="center"> 
   <img src="https://github.com/AurelieVidal/projet_Android/assets/123561028/ba1b8224-d0d8-4428-9cda-2b3b3b6420f2" /> 
 </p>
