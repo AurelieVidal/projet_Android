@@ -2,6 +2,8 @@
 
 Ce document est un guide d'utilisation pour l'application Android que nous avons créée dans le cadre du cours de Matériels Mobile.
 
+Note : Certaines parties de l'application ne fonctionnent pas sur émulateur, il est donc nécéssaire de tester notre application sur un téléphone physique.
+
 ## Sommaire
 1.  Connexion
 2. Inscription
